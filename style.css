@@ -1,0 +1,58 @@
+:root {
+    --board-size: 7;
+}
+
+body {
+    height: 100vh;
+    background-color: #222;
+    color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+header, footer {
+    background-color: #333;
+    height: 10vh;
+    text-align: center;
+}
+
+main {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+h1 {
+    font-size: 4vmin;
+}
+
+.board {
+    background-color: #22a;
+    width: 50vmin;
+    height: 50vmin;
+    margin: 2vmin;
+    display: grid;
+    grid-template-columns: repeat(var(--board-size), 1fr);
+    grid-template-rows: repeat(var(--board-size), 1fr);
+    gap: 2vmin;
+    padding: 2vmin;
+    border: solid black 0.25vmin;
+    border-radius: 5%;
+}
+
+.node {
+    background-color: #555;
+    border: solid black 1px;
+    border-radius: 50%;
+}
+
+.node:hover{
+    background-color: #888;
+    cursor: pointer;
+
+}
