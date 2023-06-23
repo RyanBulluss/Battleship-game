@@ -11,21 +11,29 @@ let ships = {
 
 
 // Variables
-let boardSize = 7;
+let boardSize;
 let userSizeChoice = 7;
-let playerBoard = createBoard(7);
-let cpuBoard = createBoard(7);
-let playerState = [];
-let cpuState = [];
+let playerBoard;
+let cpuBoard;
+let playerState;
+let cpuState;
 
 
 // Takes an input (x) and creates a board div with x squared nodes
 // it also sets the boardSize var to use in creating the game state 
 
+init();
 
+function init() {
+    playerBoard = createBoard(userSizeChoice);
+    cpuBoard = createBoard(userSizeChoice);
+    playerState = createState(userSizeChoice);
+    cpuState = createState(userSizeChoice);
+    boardSize = userSizeChoice * userSizeChoice;
+}
 
 function createShips() {
-
+    
 
 }
 
@@ -54,7 +62,17 @@ function createShips() {
 
 
 
-
+function createState(size) {
+    let arrRow = [];
+    for (let i = 0; i < size; i++) {
+        let arrCol = [];
+        for (let j = 0; j < size; j++) {
+            arrCol.push(0)
+        }
+        arrRow.push(arrCol);
+    }
+    return arrRow;
+}
 
 function createBoard(size) {
     boardSize = size * size;
