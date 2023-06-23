@@ -2,6 +2,10 @@
     --board-size: 7;
 }
 
+ html {
+    max-height: 100vh;
+}
+
 body {
     height: 100vh;
     background-color: #999;
@@ -17,6 +21,11 @@ header, footer {
     background-color: #333;
     height: 10vh;
     text-align: center;
+}
+
+section {
+    height: 10vh;
+    background-color: antiquewhite;
 }
 
 main {
@@ -59,6 +68,34 @@ h1 {
 
 .ship {
     background-color: #444;
-    border: solid black 1px;
+    height: 6vmin;
+
+    margin: 0.5vmin;
+
+    
 }
 
+.ship-container {
+    height: 50vmin;
+    width: 40vmin;
+    border: solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+#ship2 {
+    width: 14vmin;
+}
+
+#ship3 {
+    width: 21vmin;
+}
+
+#ship4 {
+    width: 28vmin;
+}
+
+#ship5 {
+    width: 35vmin;
+}
