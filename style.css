@@ -4,7 +4,7 @@
 
 body {
     height: 100vh;
-    background-color: #222;
+    background-color: #999;
     color: white;
     margin: 0;
     padding: 0;
@@ -32,27 +32,32 @@ h1 {
 }
 
 .board {
-    background-color: #22a;
+    background-color: black;
     width: 50vmin;
     height: 50vmin;
     margin: 2vmin;
     display: grid;
     grid-template-columns: repeat(var(--board-size), 1fr);
     grid-template-rows: repeat(var(--board-size), 1fr);
-    gap: 2vmin;
-    padding: 2vmin;
+    gap: 0.5vmin;
+    padding: 0.5vmin;
     border: solid black 0.25vmin;
-    border-radius: 5%;
+
 }
 
 .node {
-    background-color: #555;
+    background-color: lightblue;
     border: solid black 1px;
-    border-radius: 50%;
+
 }
 
 .node:hover{
     background-color: #888;
     cursor: pointer;
 
+}
+
+.ship {
+    background-color: #444;
+    border: solid black 1px;
 }
