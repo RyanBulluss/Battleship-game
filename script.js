@@ -43,49 +43,79 @@ function init() {
     cpuBoard = createBoard(userSizeChoice);
     playerState = createState(boardSize);
     cpuState = createState(boardSize);
+    randomShips(playerState, shipsArray);
+    randomShips(cpuState, shipsArray);  
+    renderShips();
 }
 
 function render() {
     renderShips();
-    renderControls()
 }
 
-
-// rotateButton.addEventListener('click', rotateShips);
-
-
-
-
-
-// random start index, random direction(0:up 1:right 2:down 3:left)
-function randomShip(state, ship) {
-    let firstIndex = rng(boardSize);
-    let direction = rng(4);
-    console.log(firstIndex);
-
-    for (let i = 0; i < ship.length; i++) {
-        switch(direction) {
-            case 0:
-                state[firstIndex - (userSizeChoice * i)] = 1;
-            break;
-            case 1:
-                state[firstIndex + i] = 1;
-            break;
-            case 2:
-                state[firstIndex + (userSizeChoice * i)] = 1;
-            break;
-            case 3:
-                state[firstIndex - i] = 1;
+function renderShips() {
+    const boardArr = Array.from(playerBoard.children);
+    boardArr.forEach(node => {
+        let idx = node.id;
+        if (playerState[idx] === 1){
+            node.classList.remove('node')
+            node.classList.add('ship')
         }
-    }
+    });
 }
 
 
 
+// random start index, random direction(0 = vertical 1 = horizontal)
+function randomShips(state, ships) {
+    let edges = getEdges();
+    ships.forEach((ship) => {
+        
 
-function renderBoard() {
-    
+        //Check if boat will fit and loop new positions until it fits
+        
+        let approved = false;
+        let direction;
+        let firstIndex;
+        let shipPositions = [];
+
+        while(approved === false) {
+            firstIndex = rng(boardSize);
+            direction = rng(2);
+            shipPositions = [];
+            approved = true;
+            for (let i = 0; i < ship; i++) {
+                if (direction) {
+                    shipPositions.push(firstIndex + i);
+                } else {
+                    shipPositions.push(firstIndex + (userSizeChoice * i));
+                }
+            }
+
+
+            shipPositions.forEach(num => {
+                if (edges.includes(num) && num < shipPositions) shipPositions = false;
+            })
+
+            if (state[firstIndex + (userSizeChoice * (ship - 1)) ] === undefined) shipPositions = false;
+
+        }
+            
+
+
+
+
+
+        for (let i = 0; i < ship; i++) {
+            if (direction) {
+                state[firstIndex + i] = 1;
+            } else {
+                state[firstIndex + (userSizeChoice * i)] = 1;
+            }
+        }
+    })
 }
+
+
 
 
 function renderControls() {
@@ -98,18 +128,18 @@ function renderControls() {
 
 
 
-function createShips() {
-    let newDiv = document.createElement('div');
-    newDiv.setAttribute('class', 'ship-holder');
-    mainSection.append(newDiv);
-    for (let i = 0; i < boardSize; i++) {
-        let newNode = document.createElement('div');
-        newNode.setAttribute('class', 'node');
-        newNode.setAttribute('id', `${char + i}`);
-        newDiv.append(newNode);
-    }
-    return newDiv;
-}
+// function createShips() {
+//     let newDiv = document.createElement('div');
+//     newDiv.setAttribute('class', 'ship-holder');
+//     mainSection.append(newDiv);
+//     for (let i = 0; i < boardSize; i++) {
+//         let newNode = document.createElement('div');
+//         newNode.setAttribute('class', 'node');
+//         newNode.setAttribute('id', `${char + i}`);
+//         newDiv.append(newNode);
+//     }
+//     return newDiv;
+// }
 
 
 
@@ -152,4 +182,14 @@ function rng(num) {
 function clearMain() {
     const mainEls = document.querySelectorAll('main > *');
     mainEls.forEach((el) => el.remove());
+}
+
+function getEdges() {
+    let arr = []
+    let count = -1;
+    while (arr.length < userSizeChoice) {
+        count += userSizeChoice;
+        arr.push(count);
+    }
+    return arr;
 }

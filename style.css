@@ -68,11 +68,7 @@ h1 {
 
 .ship {
     background-color: #444;
-    height: 6vmin;
-
-    margin: 0.5vmin;
-
-    
+    border: solid black 1px;
 }
 
 .ship-container {
