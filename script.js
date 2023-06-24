@@ -19,8 +19,6 @@ const ships = {
 const shipsArray = [ships.carrier, ships.battleship, ships.cruise, ships.submarine, ships.destroyer];
 
 
-
-
 // Variables
 let userSizeChoice = 7;
 let boardSize = 49;
@@ -35,91 +33,20 @@ let cpuState;
 init();
 
 
-
-
-
 function init() {
     playerBoard = createBoard(userSizeChoice);
     cpuBoard = createBoard(userSizeChoice);
-    playerState = createState(boardSize);
-    cpuState = createState(boardSize);
-    randomShips(playerState, shipsArray);
-    randomShips(cpuState, shipsArray);  
-    renderShips();
+    playerState = createState(userSizeChoice);
+    cpuState = createState(userSizeChoice);
+
+    // randomShips(playerState, shipsArray);
+    // randomShips(cpuState, shipsArray);  
+    render();
 }
+
 
 function render() {
-    renderShips();
-}
-
-function renderShips() {
-    const boardArr = Array.from(playerBoard.children);
-    boardArr.forEach(node => {
-        let idx = node.id;
-        if (playerState[idx] === 1){
-            node.classList.remove('node')
-            node.classList.add('ship')
-        }
-    });
-}
-
-
-
-// random start index, random direction(0 = vertical 1 = horizontal)
-function randomShips(state, ships) {
-    let edges = getEdges();
-    ships.forEach((ship) => {
-        
-
-        //Check if boat will fit and loop new positions until it fits
-        
-        let approved = false;
-        let direction;
-        let firstIndex;
-        let shipPositions = [];
-
-        while(approved === false) {
-            firstIndex = rng(boardSize);
-            direction = rng(2);
-            shipPositions = [];
-            approved = true;
-            for (let i = 0; i < ship; i++) {
-                if (direction) {
-                    shipPositions.push(firstIndex + i);
-                } else {
-                    shipPositions.push(firstIndex + (userSizeChoice * i));
-                }
-            }
-
-
-            shipPositions.forEach(num => {
-                if (edges.includes(num) && num < shipPositions) shipPositions = false;
-            })
-
-            if (state[firstIndex + (userSizeChoice * (ship - 1)) ] === undefined) shipPositions = false;
-
-        }
-            
-
-
-
-
-
-        for (let i = 0; i < ship; i++) {
-            if (direction) {
-                state[firstIndex + i] = 1;
-            } else {
-                state[firstIndex + (userSizeChoice * i)] = 1;
-            }
-        }
-    })
-}
-
-
-
-
-function renderControls() {
-
+    renderBoard();
 }
 
 
@@ -128,31 +55,29 @@ function renderControls() {
 
 
 
-// function createShips() {
-//     let newDiv = document.createElement('div');
-//     newDiv.setAttribute('class', 'ship-holder');
-//     mainSection.append(newDiv);
-//     for (let i = 0; i < boardSize; i++) {
-//         let newNode = document.createElement('div');
-//         newNode.setAttribute('class', 'node');
-//         newNode.setAttribute('id', `${char + i}`);
-//         newDiv.append(newNode);
-//     }
-//     return newDiv;
-// }
 
 
 
 
 
+
+
+
+
+
+
+// Creates and returns a 2D array based on the size passed in. All positions are given value 0
 function createState(size) {
     let arr = [];
     for (let i = 0; i < size; i++) {
-        arr.push(0)
+        let arr2 = [];
+        for (let j = 0; j < size; j++) {
+            arr2.push(0);
+        }
+        arr.push(arr2);
     }
     return arr;
 }
-
 
 // Takes an input (x) and creates a board div with x squared nodes
 // it also sets the boardSize var to use in creating the game state
@@ -163,15 +88,83 @@ function createBoard(size) {
     let newDiv = document.createElement('div');
     newDiv.setAttribute('class', 'board');
     mainSection.append(newDiv);
-    for (let i = 0; i < boardSize; i++) {
-        let newNode = document.createElement('div');
-        newNode.setAttribute('class', 'node');
-        newNode.id = i;
-        newDiv.append(newNode);
+    for (let i = 0; i < userSizeChoice; i++) {
+        for (let j = 0; j < userSizeChoice; j++) {
+            let newNode = document.createElement('div');
+            newNode.setAttribute('class', 'node');
+            newNode.id = `${i}${j}`;
+            newDiv.append(newNode);
+        }
     }
     return newDiv;
 }
 
+// Match the Dom board to the game state ship positions
+function renderBoard() {
+    const boardArr = Array.from(playerBoard.children);
+    boardArr.forEach(node => {
+        let idx = node.id.split('');
+        let target = playerState[idx[0]][idx[1]]
+        switch (target){
+            case 0:
+                node.className = 'node';
+            break;
+            case 1:
+                node.className = 'ship';
+            break;
+            case 2:
+                node.className = 'miss';
+            break;
+            case 3:
+                node.className = 'hit';
+            break;
+        }
+    });
+}
+
+// Takes a game state and a ship to put on that game state. Changes the values in the positions to 1
+// Does not touch DOM, that is done in render functions
+function randomShip(state, shipSize) {
+    // Valid is set to false to continue while loop until all conditions are met
+    let valid = false;
+    while (!valid) {
+        // New random coordinates and direction on every loop (try)
+        let x = rng(state.length);
+        let y = rng(state.length);
+        let isVertical = rng(2) === 1
+
+        //array to track the ship positions with a loop to push them in
+        let shipPositions = []
+        for (let i = 0; i < shipSize; i++) {
+            if (isVertical) {
+                shipPositions.push([y + i, x])
+            } else {
+                shipPositions.push([y, x + i])
+            }
+        }
+
+        // Valid check is true if all positions are within state length and position is empty (0)
+        let validCheck = shipPositions.every(([x, y]) => {
+            return (
+            x >= 0 &&
+            x < state[0].length &&
+            y >= 0 &&
+            y < state.length &&
+            state[y][x] === 0
+            );
+        });
+        
+        // if valid check was false retry loop
+        if (!validCheck) continue;
+
+
+        // Set the valid checked ship positions onto the game state. Valid = true to end loop
+        shipPositions.forEach(([x, y]) => {
+            state[y][x] = 1;
+        })
+        valid = true;
+    }
+}
 
 // Returns random number between 0 - (num - 1) for random functions
 function rng(num) {
@@ -184,12 +177,3 @@ function clearMain() {
     mainEls.forEach((el) => el.remove());
 }
 
-function getEdges() {
-    let arr = []
-    let count = -1;
-    while (arr.length < userSizeChoice) {
-        count += userSizeChoice;
-        arr.push(count);
-    }
-    return arr;
-}
