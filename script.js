@@ -21,6 +21,7 @@ const shipsArray = [ships.carrier, ships.battleship, ships.cruiser, ships.submar
 
 // Variables
 
+let username = 'Ryan';
 let userSizeChoice = 7; //over 10 breaks game
 let boardSize = 49;
 let playerBoard;
@@ -28,6 +29,8 @@ let cpuBoard;
 let playerState;
 let cpuState;
 let PlayersTurn = true;
+let winner;
+let playing;
 
 
 // Event Listeners
@@ -41,6 +44,7 @@ init();
 cpuBoard.addEventListener('click', playerFire);
 
 function init() {
+    playing = true;
     playerBoard = createBoard('player', userSizeChoice);
     cpuBoard = createBoard('cpu', userSizeChoice);
     playerState = createState(userSizeChoice);
@@ -61,12 +65,25 @@ function render() {
 
 
 
+// The player name and state passed in are opposite as it checks the board you are firing at
+function checkWin() {
+    checkPlayerWin('cpu', playerState);
+    checkPlayerWin(username, cpuState);
+}
 
 
 
-
-
-
+function checkPlayerWin(playerName, state) {
+    let checks = []
+    state.forEach(arr => {
+        let check = arr.includes(1);
+        checks.push(check);
+        if (check) return;
+    })
+    if (checks.includes(true)) return;
+    winner = playerName;
+    playing = false;
+}
 
 
 
@@ -108,6 +125,7 @@ function createBoard(playerName, size) {
 
 // On clicking the cpu board. Chesks for valid click and turns 0 to 2 or 1 to 3 
 function playerFire(evt) {
+    if (!playing) return;
     if (evt.target.className === 'board') return;
     let node = evt.target.id;
     let yx = node.split('')
@@ -119,7 +137,7 @@ function playerFire(evt) {
     } else if (statePosition === 1) {
         cpuState[yx[0]][yx[1]] = 3; //hit
     }
-    // checkWin();
+    checkWin();
     cpuFire();
 }
 
@@ -134,7 +152,7 @@ function cpuFire() {
         playerState[y][x] = target ? 3 : 2 ;
         approved = true;
     }
-    // checkWin();
+    checkWin();
     render();
 }
 
