@@ -10,17 +10,18 @@ const rotateButton = document.getElementById('rotate');
 const ships = {
     carrier: 5,
     battleship: 4,
-    cruise: 3,
+    cruiser: 3,
     submarine: 3,
     destroyer: 2
 }
 
 // Ships in an array to make looping over them easier
-const shipsArray = [ships.carrier, ships.battleship, ships.cruise, ships.submarine, ships.destroyer];
+const shipsArray = [ships.carrier, ships.battleship, ships.cruiser, ships.submarine, ships.destroyer];
 
 
 // Variables
-let userSizeChoice = 7;
+
+let userSizeChoice = 7; //over 10 breaks game
 let boardSize = 49;
 let playerBoard;
 let cpuBoard;
@@ -105,7 +106,7 @@ function createBoard(playerName, size) {
     return newDiv;
 }
 
-// On clicking the cpu board. Chesks for valid click and turns 0 to 2 or 1 to 3
+// On clicking the cpu board. Chesks for valid click and turns 0 to 2 or 1 to 3 
 function playerFire(evt) {
     if (evt.target.className === 'board') return;
     let node = evt.target.id;
@@ -118,6 +119,23 @@ function playerFire(evt) {
     } else if (statePosition === 1) {
         cpuState[yx[0]][yx[1]] = 3; //hit
     }
+    // checkWin();
+    cpuFire();
+}
+
+// 
+function cpuFire() {
+    let approved = false;
+    while(!approved) {
+        let x = rng(userSizeChoice);
+        let y = rng(userSizeChoice);
+        let target = playerState[y][x];
+        if (target === 2 || target === 3) continue;
+        playerState[y][x] = target ? 3 : 2 ;
+        approved = true;
+    }
+    // checkWin();
+    render();
 }
 
 // Match the Dom board to the game state ship positions
