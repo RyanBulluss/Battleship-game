@@ -54,13 +54,25 @@ h1 {
 
 }
 
+
+
+#cpu-board > .ship {
+    background-color: lightblue;
+    border: solid black 1px;
+}
+
+#cpu-board > .ship:hover {
+    background-color: #888;
+    cursor: pointer;
+}
+
 .node {
     background-color: lightblue;
     border: solid black 1px;
 
 }
 
-.node:hover{
+#cpu-board >.node:hover{
     background-color: #888;
     cursor: pointer;
 
@@ -69,6 +81,11 @@ h1 {
 .ship {
     background-color: #555;
     border: solid black 1px;
+}
+
+#cpu-board > .ship:hover {
+    background-color: #888;
+    cursor: pointer;
 }
 
 .miss {

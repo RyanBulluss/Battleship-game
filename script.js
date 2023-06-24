@@ -26,19 +26,26 @@ let playerBoard;
 let cpuBoard;
 let playerState;
 let cpuState;
+let PlayersTurn = true;
 
+
+// Event Listeners
 
 
 
 init();
 
+// Must be below init otherwise board does not exist
+
+cpuBoard.addEventListener('click', playerFire);
 
 function init() {
-    playerBoard = createBoard(userSizeChoice);
-    cpuBoard = createBoard(userSizeChoice);
+    playerBoard = createBoard('player', userSizeChoice);
+    cpuBoard = createBoard('cpu', userSizeChoice);
     playerState = createState(userSizeChoice);
     cpuState = createState(userSizeChoice);
-
+    setShipPositions(playerState);
+    setShipPositions(cpuState);
     // randomShips(playerState, shipsArray);
     // randomShips(cpuState, shipsArray);  
     render();
@@ -48,8 +55,6 @@ function init() {
 function render() {
     renderBoard();
 }
-
-
 
 
 
@@ -82,11 +87,12 @@ function createState(size) {
 // Takes an input (x) and creates a board div with x squared nodes
 // it also sets the boardSize var to use in creating the game state
 // it gives board class and node class as well as id index with p or c for player or cpu
-function createBoard(size) {
+function createBoard(playerName, size) {
     boardSize = size * size;
     rootVars.style.setProperty('--board-size', size);
     let newDiv = document.createElement('div');
-    newDiv.setAttribute('class', 'board');
+    newDiv.setAttribute('id', `${playerName}-board`)
+    newDiv.setAttribute('class', `board`);
     mainSection.append(newDiv);
     for (let i = 0; i < userSizeChoice; i++) {
         for (let j = 0; j < userSizeChoice; j++) {
@@ -99,12 +105,27 @@ function createBoard(size) {
     return newDiv;
 }
 
+// On clicking the cpu board. Chesks for valid click and turns 0 to 2 or 1 to 3
+function playerFire(evt) {
+    if (evt.target.className === 'board') return;
+    let node = evt.target.id;
+    let yx = node.split('')
+    let statePosition = cpuState[yx[0]][yx[1]];
+
+    // if (statePosition !== 0 || statePosition !== 1) return;
+    if (statePosition === 0) {
+        cpuState[yx[0]][yx[1]] = 2; //miss
+    } else if (statePosition === 1) {
+        cpuState[yx[0]][yx[1]] = 3; //hit
+    }
+}
+
 // Match the Dom board to the game state ship positions
-function renderBoard() {
-    const boardArr = Array.from(playerBoard.children);
+function renderOneBoard(board, state) {
+    const boardArr = Array.from(board.children);
     boardArr.forEach(node => {
         let idx = node.id.split('');
-        let target = playerState[idx[0]][idx[1]]
+        let target = state[idx[0]][idx[1]]
         switch (target){
             case 0:
                 node.className = 'node';
@@ -121,6 +142,12 @@ function renderBoard() {
         }
     });
 }
+
+// Renders Player Board and Cpu Board to display the current state
+function renderBoard() {
+    renderOneBoard(playerBoard, playerState);
+    renderOneBoard(cpuBoard, cpuState);
+} 
 
 // Takes a game state and a ship to put on that game state. Changes the values in the positions to 1
 // Does not touch DOM, that is done in render functions
@@ -164,6 +191,13 @@ function randomShip(state, shipSize) {
         })
         valid = true;
     }
+}
+
+// Loops through shipsArray to add each ship to the state
+function setShipPositions(state) {
+    shipsArray.forEach(length => {
+        randomShip(state, length)
+    })
 }
 
 // Returns random number between 0 - (num - 1) for random functions
