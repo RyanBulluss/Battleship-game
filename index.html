@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Battleship</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
@@ -15,9 +16,48 @@
 
     </section>
     <main>
-
-
-
+        <div id="form-div">
+            <form>
+                <label for="name-input">Your name:</label>
+                <input type="text" id="name-input">
+                <input type="submit" name="" id="">
+            </form>
+            <form>
+                <label for="slider">Board Size:</label>
+                <input type="range" min="5" max="10" id="slider">
+            </form>
+            <form>
+                <label>Difficulty:</label>
+                <div>
+                    <label for="easy">Easy</label>
+                    <input type="radio" id="easy">
+                </div>
+                <div>
+                    <label for="easy">Medium</label>
+                    <input type="radio" id="medium">
+                </div>
+                <div>
+                    <label for="easy">Hard</label>
+                    <input type="radio" id="hard">
+                </div>
+            </form>
+            <form>
+                <label>Abilities:</label>
+                <div>
+                    <label for="ability-1">Heavy Artillery</label>
+                    <input type="radio" id="ability-1">
+                </div>
+                <div>
+                    <label for="ability-2">Rolling thunder</label>
+                    <input type="radio" id="ability-2">
+                </div>
+                <div>
+                    <label for="ability-3">Nuke</label>
+                    <input type="radio" id="ability-3">
+                </div>
+            </form>
+            <button>Start Game</button>
+        </div>
 
 
     </main>

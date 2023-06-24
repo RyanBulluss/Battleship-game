@@ -5,6 +5,7 @@ const messageSection = document.getElementById('message-section');
 const controlsSection = document.getElementById('controls-section');
 const shipContainer = document.querySelector('.ship-container');
 const rotateButton = document.getElementById('rotate');
+const nameInput = document.querySelector('#name-input');
 
 // Each ship stored in object to reference the lengths
 const ships = {
@@ -21,8 +22,8 @@ const shipsArray = [ships.carrier, ships.battleship, ships.cruiser, ships.submar
 
 // Variables
 
-let username = 'Ryan';
-let userSizeChoice = 7; //over 10 breaks game
+let username;
+let userSizeChoice = 6; //over 10 breaks game
 let boardSize = 49;
 let playerBoard;
 let cpuBoard;
@@ -37,22 +38,23 @@ let playing;
 
 
 
-init();
+// init();
 
 // Must be below init otherwise board does not exist
 
-cpuBoard.addEventListener('click', playerFire);
+
 
 function init() {
     playing = true;
-    playerBoard = createBoard('player', userSizeChoice);
     cpuBoard = createBoard('cpu', userSizeChoice);
+    playerBoard = createBoard('player', userSizeChoice);
     playerState = createState(userSizeChoice);
     cpuState = createState(userSizeChoice);
     setShipPositions(playerState);
     setShipPositions(cpuState);
     // randomShips(playerState, shipsArray);
     // randomShips(cpuState, shipsArray);  
+    cpuBoard.addEventListener('click', playerFire);
     render();
 }
 
@@ -65,13 +67,22 @@ function render() {
 
 
 
+nameInput.addEventListener('keypress', function(evt){
+    if (evt.key === 'Enter'){
+        username = nameInput.value;
+    }
+});
+
+
+
+
+
+
 // The player name and state passed in are opposite as it checks the board you are firing at
 function checkWin() {
     checkPlayerWin('cpu', playerState);
     checkPlayerWin(username, cpuState);
 }
-
-
 
 function checkPlayerWin(playerName, state) {
     let checks = []
@@ -84,10 +95,6 @@ function checkPlayerWin(playerName, state) {
     winner = playerName;
     playing = false;
 }
-
-
-
-
 
 // Creates and returns a 2D array based on the size passed in. All positions are given value 0
 function createState(size) {
