@@ -112,7 +112,7 @@ function playerFire(evt) {
     let node = evt.target.id;
     let yx = node.split('')
     let statePosition = cpuState[yx[0]][yx[1]];
-
+    if(statePosition === 2 || statePosition === 3) return;
     // if (statePosition !== 0 || statePosition !== 1) return;
     if (statePosition === 0) {
         cpuState[yx[0]][yx[1]] = 2; //miss
