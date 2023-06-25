@@ -2,10 +2,6 @@
     --board-size: 7;
 }
 
-html {
-    box-sizing: border-box;
-}
-
 html, body {
     font-family: "Permanent Marker", cursive;
     font-size: 2.5vmin;
@@ -31,7 +27,7 @@ header, footer {
 }
 
 section {
-    height: 10vh;
+    height: 10vmin;
     background-color: antiquewhite;
 }
 
@@ -67,6 +63,8 @@ h1 {
     border: solid black 1px;
 }
 
+
+
 #cpu-board > .ship:hover {
     background-color: #888;
     cursor: pointer;
@@ -81,7 +79,6 @@ h1 {
 #cpu-board >.node:hover{
     background-color: #888;
     cursor: pointer;
-
 }
 
 .ship {
@@ -131,16 +128,9 @@ form > div {
     justify-content: space-between;
 } 
 
-#form-div button {
-    height: 5vmin;
-    width: 20vmin;
-    border-radius: 10vmin;
-    font-size: 2vmin;
-    background-color: steelblue;
-    border: solid 0.2vmin;
-}
 
-#form-div button:hover {
+
+button:hover {
     background-color: lightblue;
     cursor: pointer;
 }
@@ -151,4 +141,66 @@ input:hover {
 
 #name-input {
     cursor: auto;
+}
+
+#controls-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    height: 7vmin;
+    width: 20vmin;
+    border-radius: 10vmin;
+    font-size: 2vmin;
+    background-color: steelblue;
+    color: white;
+}
+
+#placement-board > .ship {
+    background-color: lightblue;
+    border: solid black 1px;
+}
+
+#placement-board >.node:hover{
+    background-color: #888;
+    cursor: pointer;
+}
+
+#ship-container {
+    border: solid black 1vmin;
+    height: 50vmin;
+    width: 50vmin;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#ship-5 {
+    background-color: #555;
+    border: solid black 1px;
+    height: 30vmin;
+    width: 5vmin;
+}
+
+#ship-4 {
+    background-color: #555;
+    border: solid black 1px;
+    height: 24vmin;
+    width: 5vmin;
+}
+
+#ship-3 {
+    background-color: #555;
+    border: solid black 1px;
+    height: 18vmin;
+    width: 5vmin;
+}
+
+#ship-2 {
+    background-color: #555;
+    border: solid black 1px;
+    height: 12vmin;
+    width: 5vmin;
 }

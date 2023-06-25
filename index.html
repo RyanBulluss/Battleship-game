@@ -13,18 +13,16 @@
         <h1>Battleship</h1>
     </header>
     <section id="message-section">
-
     </section>
     <main>
         <div id="form-div">
             <form>
                 <label for="name-input">Your name:</label>
                 <input type="text" id="name-input">
-                <input type="submit" name="" id="">
             </form>
             <form>
                 <label for="slider">Board Size:</label>
-                <input type="range" min="5" max="10" id="slider">
+                <input type="range" min="6" max="10" id="board-slider">
             </form>
             <form>
                 <label>Difficulty:</label>
@@ -42,27 +40,16 @@
                 </div>
             </form>
             <form>
-                <label>Abilities:</label>
-                <div>
-                    <label for="ability-1">Heavy Artillery</label>
-                    <input type="radio" id="ability-1">
-                </div>
-                <div>
-                    <label for="ability-2">Rolling thunder</label>
-                    <input type="radio" id="ability-2">
-                </div>
-                <div>
-                    <label for="ability-3">Nuke</label>
-                    <input type="radio" id="ability-3">
-                </div>
+                <label for="slider">Ships:</label>
+                <input type="range" min="0" max="5" id="ship-slider">
             </form>
-            <button>Start Game</button>
+            
         </div>
 
 
     </main>
     <section id="controls-section">
-
+        <button id="start-game">Start Game</button>
     </section>
     <footer>
         <h4>By Ryan Bulluss</h4>
