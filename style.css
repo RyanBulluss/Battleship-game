@@ -27,8 +27,9 @@ header, footer {
 }
 
 section {
-    height: 10vmin;
+    height: 5vmin;
     background-color: antiquewhite;
+    padding: 2vmin;
 }
 
 main {
@@ -145,7 +146,7 @@ input:hover {
 
 #controls-section {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
 }
 
@@ -159,7 +160,7 @@ button {
 }
 
 #placement-board > .ship {
-    background-color: lightblue;
+    background-color: #555;
     border: solid black 1px;
 }
 
@@ -175,6 +176,7 @@ button {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    margin: 2vmin;
 }
 
 #ship-5 {

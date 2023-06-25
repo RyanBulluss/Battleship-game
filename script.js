@@ -18,7 +18,7 @@ const ships = {
 }
 
 // Ships in an array to make looping over them easier
-const shipsArray = [ships.carrier, ships.battleship, ships.destroyer];
+const shipsArray = [ships.carrier, ships.battleship, ships.submarine, ships.destroyer];
 
 
 // Variables
@@ -34,7 +34,9 @@ let PlayersTurn = true;
 let winner;
 let playing;
 let angle = 0;
-let currentShip = 5;
+let currentShip;
+let currentShipLength;
+let placementBoard;
 
 
 // Pressing the start game button stores the user values. Then it clears main and creates ship placement screen 
@@ -45,14 +47,18 @@ startButton.addEventListener('click', startGame);
 
 
 function init() {
+    if (document.getElementById('ship-container').innerHTML !== '') return
+    clearMain();
+    clearControls();
+
     playing = true;
     boardSize = userSizeChoice * userSizeChoice;
     cpuBoard = createBoard('cpu', userSizeChoice);
     playerBoard = createBoard('player', userSizeChoice);
     
     cpuState = createState(userSizeChoice);
-    setShipPositions(playerState);
     setShipPositions(cpuState);
+
     // randomShips(playerState, shipsArray);
     // randomShips(cpuState, shipsArray);  
     cpuBoard.addEventListener('click', playerFire);
@@ -66,81 +72,87 @@ function render() {
 
 
 
+
+
+
+// selects the clicked ship and gets the length ready to be added 
+function selectShip(evt) {
+    let ship = evt.target;
+    if (ship.id === 'ship-container') return; 
+    let split = ship.id.split('-');
+    currentShipLength = split[1]; 
+    currentShip = ship;
+} 
+
+// After clicking a node check if valid and then the current ship in the current angle
+// Then remove the ship div and reset the current ship length 
 function placeBattleship(evt) {
     let target = evt.target
     if (target.className !== 'node') return
     let firstIndex = target.id.split('');
-
-    let y = firstIndex[0];
-    let x = firstIndex[1];
+    let y = parseInt(firstIndex[0]);
+    let x = parseInt(firstIndex[1]);
 
     let shipPositions = []
-    for (let i = 0; i < currentShip; i++) {
+    for (let i = 0; i < currentShipLength; i++) {
         if (angle === 0) {
             shipPositions.push([y + i, x])
         } else {
             shipPositions.push([y, x + i])
         }
     }
-    console.log(playerState[y][x]);
 
     // Valid check is true if all positions are within state length and position is empty (0)
-    // if (!shipPositions.every(([x, y]) => {
-    //     return (
-    //     x >= 0 &&
-    //     x < userSizeChoice &&
-    //     y >= 0 &&
-    //     y < userSizeChoice &&
-    //     playerState[y][x] === 0
-    //     )
-    // })) return;
+    if (!shipPositions.every(([y, x]) => {
+        return (
+        x >= 0 &&
+        x < userSizeChoice &&
+        y >= 0 &&
+        y < userSizeChoice &&
+        playerState[y][x] === 0
+        )
+    })) return;
 
-    console.log(shipPositions);
-    shipPositions.forEach(pos => {
-        playerState[0][1] = 1;
+
+    shipPositions.forEach(([a, b]) => {
+        playerState[a][b] = 1;
     })
-    renderOneBoard('placement', playerState);
+    renderOneBoard(placementBoard, playerState);
+    currentShip.remove();
+    currentShipLength = 0;
 
 }
 
+// Creates button to contiue from the ship screen to the game screen
+function createContinueButton() {
+    let newButton = document.createElement('button');
+    newButton.id = 'continue-button';
+    newButton.innerText = 'Continue';
+    controlsSection.append(newButton);
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Create a board, create ships, create buttons and init player game state to place ships into
 function createShipMenu() {
-    createBoard('placement', userSizeChoice);
+    placementBoard = createBoard('placement', userSizeChoice);
     createShips();
     createRotateButton();
+    createContinueButton();
     document.getElementById('rotate-button').addEventListener('click', rotateShips);
     document.getElementById('placement-board').addEventListener('click', placeBattleship);
+    document.getElementById('ship-container').addEventListener('click', selectShip);
+    document.getElementById('continue-button').addEventListener('click', init)
     playerState = createState(userSizeChoice);
 }
 
+// toggle angle = 90/0 and rotate div to display ships new angle
 function rotateShips() {
     let container = document.getElementById('ship-container');
     angle = angle === 0 ? 90 : 0;
-
     container.style.transform = `rotate(${angle}deg)`;
-
-    // console.log(angle)
-    // const allShips = document.querySelectorAll('#ship-container > div');
-    // allShips.forEach(ship => {
-    //     ship.style.transform = `rotate(${angle}deg)`;
-    // })
 }
 
-
+// Creates a button in the controls section for rotating ships
 function createRotateButton() {
     let newButton = document.createElement('button');
     newButton.id = 'rotate-button';
@@ -148,6 +160,7 @@ function createRotateButton() {
     controlsSection.append(newButton);
 }
 
+// Creates a Ship container, and adds the selected amount of ships to it
 function createShips(){
     let newDiv = document.createElement('div');
     newDiv.id = 'ship-container';
@@ -351,8 +364,9 @@ function clearMain() {
     mainEls.forEach((el) => el.remove());
 }
 
+// Clears all elements from controls section
 function clearControls() {
-    let buttons = Array.from(controlsSection);
+    const buttons = document.querySelectorAll('#controls-section > *');
     buttons.forEach(el => el.remove())
 }
 
