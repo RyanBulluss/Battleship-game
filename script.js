@@ -1,7 +1,6 @@
 // constants
 const mainSection = document.querySelector('main');
 const rootVars = document.querySelector(':root');
-
 const controlsSection = document.querySelector('#controls-section');
 const startButton = document.getElementById('start-game');
 const nameInput = document.querySelector('#name-input');
@@ -22,7 +21,6 @@ const shipsArray = [ships.carrier, ships.battleship, ships.submarine, ships.dest
 
 
 // Variables
-
 let username;
 let userSizeChoice; //over 10 breaks game
 let boardSize;
@@ -43,9 +41,7 @@ let placementBoard;
 startButton.addEventListener('click', startGame);
 
 
-
-
-
+// Starts the main game, adds relevent event listeners, variables, game boards, cpu state etc.
 function init() {
     if (document.getElementById('ship-container').innerHTML !== '') return
     clearMain();
@@ -67,15 +63,10 @@ function init() {
     render();
 }
 
-
+// Renders the state of game to the DOM
 function render() {
     renderBoard();
 }
-
-
-
-
-
 
 // selects the clicked ship and gets the length ready to be added 
 function selectShip(evt) {
@@ -129,6 +120,7 @@ function placeBattleship(evt) {
 
 }
 
+// Helps to create all buttons without repeated code
 function createButton(name) {
     let newButton = document.createElement('button');
     newButton.id = `${name}-button`;
@@ -218,8 +210,6 @@ function createState(size) {
 }
 
 // Takes an input (x) and creates a board div with x squared nodes
-// it also sets the boardSize var to use in creating the game state
-// it gives board class and node class as well as id index with p or c for player or cpu
 function createBoard(playerName, size) {
     boardSize = size * size;
     rootVars.style.setProperty('--board-size', size);
