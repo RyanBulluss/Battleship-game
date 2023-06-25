@@ -50,6 +50,8 @@ function init() {
     if (document.getElementById('ship-container').innerHTML !== '') return
     clearMain();
     clearControls();
+    createButton('surrender');
+    document.getElementById('surrender-button').addEventListener('click', function() {window.location.reload()});
 
     playing = true;
     boardSize = userSizeChoice * userSizeChoice;
@@ -127,21 +129,21 @@ function placeBattleship(evt) {
 
 }
 
-// Creates button to contiue from the ship screen to the game screen
-function createContinueButton() {
+function createButton(name) {
     let newButton = document.createElement('button');
-    newButton.id = 'continue-button';
-    newButton.innerText = 'Continue';
+    newButton.id = `${name}-button`;
+    newButton.innerText = name.toUpperCase();
     controlsSection.append(newButton);
 }
-
 
 // Create a board, create ships, create buttons and init player game state to place ships into
 function createShipMenu() {
     placementBoard = createBoard('placement', userSizeChoice);
     createShips();
-    createRotateButton();
-    createContinueButton();
+    createButton('back');
+    createButton('rotate');
+    createButton('continue');
+    document.getElementById('back-button').addEventListener('click', function() {window.location.reload()})
     document.getElementById('rotate-button').addEventListener('click', rotateShips);
     document.getElementById('placement-board').addEventListener('click', placeBattleship);
     document.getElementById('ship-container').addEventListener('click', selectShip);
@@ -154,14 +156,6 @@ function rotateShips() {
     let container = document.getElementById('ship-container');
     angle = angle === 0 ? 90 : 0;
     container.style.transform = `rotate(${angle}deg)`;
-}
-
-// Creates a button in the controls section for rotating ships
-function createRotateButton() {
-    let newButton = document.createElement('button');
-    newButton.id = 'rotate-button';
-    newButton.innerText = 'Rotate Ships'
-    controlsSection.append(newButton);
 }
 
 // Creates a Ship container, and adds the selected amount of ships to it
