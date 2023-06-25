@@ -159,14 +159,25 @@ button {
     color: white;
 }
 
-#placement-board > .ship {
+.placement-ship {
     background-color: #555;
     border: solid black 1px;
+
+}
+
+.placement-ship:hover {
+    background-color: #222;
+    border: solid black 1px;
+    
 }
 
 #placement-board >.node:hover{
     background-color: #888;
     cursor: pointer;
+}
+
+#placement-ship::after {
+    background-color: #222;
 }
 
 #ship-container {
@@ -180,29 +191,26 @@ button {
 }
 
 #ship-5 {
-    background-color: #555;
-    border: solid black 1px;
     height: 30vmin;
     width: 5vmin;
 }
 
 #ship-4 {
-    background-color: #555;
-    border: solid black 1px;
     height: 24vmin;
     width: 5vmin;
 }
 
 #ship-3 {
-    background-color: #555;
-    border: solid black 1px;
     height: 18vmin;
     width: 5vmin;
 }
 
 #ship-2 {
-    background-color: #555;
-    border: solid black 1px;
     height: 12vmin;
     width: 5vmin;
+}
+
+.selected-ship {
+    background-color: #333;
+    border: solid 0.2vmin ;
 }

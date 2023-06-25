@@ -79,6 +79,10 @@ function render() {
 function selectShip(evt) {
     let ship = evt.target;
     if (ship.id === 'ship-container') return; 
+    document.querySelectorAll('.selected-ship').forEach(boat => {
+        boat.className = 'placement-ship';
+    })
+    ship.className = 'selected-ship';
     let split = ship.id.split('-');
     currentShipLength = split[1]; 
     currentShip = ship;
@@ -167,8 +171,9 @@ function createShips(){
     mainSection.prepend(newDiv);
     shipsArray.forEach(length => {
         let newShip = document.createElement('div');
-        newShip.id = `ship-${length}`
-        newShip.setAttribute('draggable', 'true');
+        newShip.id = `ship-${length}`;
+        newShip.className = 'placement-ship';
+        // newShip.setAttribute('draggable', 'true'); change to drag and drop later
         newDiv.append(newShip);
     })
 }
