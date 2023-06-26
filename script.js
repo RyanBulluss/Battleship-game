@@ -38,23 +38,103 @@ let angle = 0;
 let currentShip;
 let currentShipLength;
 let placementBoard;
+let cpuLastMove = {
+    hit: true,
+    position: []
+};
 
 
 // Pressing the start game button stores the user values. Then it clears main and creates ship placement screen 
 startButton.addEventListener('click', startGame);
 
+
+
+
+
+
+
+
+
+
+// Loops to find a valid position and changes boat to hit or node to miss
+// Then checks win and renders state
+function cpuFire() {
+
+    let regular = regularDifficulty()
+    if (regular) {
+        recruitDifficulty();
+        console.log('down')
+    }
+    console.log('down')
+
+    render();
+    checkWin();
+    if (winner) return winnerScreen();
+}
+
+
+function regularDifficulty() {
+
+    let y = cpuLastMove.position[0];
+    let x = cpuLastMove.position[1];
+    if (validShot(playerState, y + 1, x)) {
+        let target = playerState[y + 1][x]
+        playerState[y + 1][x] = target === 0 ? 3 : 2;
+        playerState[y + 1][x] = target === 1 ? 3 : 2;
+        cpuLastMove.hit = target === 1 ? true : false;
+        cpuLastMove.position = target === 1 ? [y + 1, x] : cpuLastMove.position;
+        console.log('down')
+    } else if (validShot(playerState, y - 1, x)) {
+        let target = playerState[y - 1][x]
+        playerState[y - 1][x] = target === 0 ? 3 : 2;
+        playerState[y - 1][x] = target === 1 ? 3 : 2;
+        cpuLastMove.hit = target === 1 ? true : false;
+        cpuLastMove.position = target === 1 ? [y - 1, x] : cpuLastMove.position;
+        console.log('down')
+    } else if (validShot(playerState, y, x + 1)) {
+        let target = playerState[y][x + 1]
+        playerState[y][x + 1] = target === 0 ? 3 : 2;
+        playerState[y][x + 1] = target === 1 ? 3 : 2;
+        cpuLastMove.hit = target === 1 ? true : false;
+        cpuLastMove.position = target === 1 ? [y, x + 1] : cpuLastMove.position;
+        console.log('down')
+    } else if (validShot(playerState, y, x - 1)) {
+        let target = playerState[y][x - 1]
+        playerState[y][x - 1] = target === 0 ? 3 : 2;
+        playerState[y][x - 1] = target === 1 ? 3 : 2;
+        cpuLastMove.hit = target === 1 ? true : false;
+        cpuLastMove.position = target === 1 ? [y, x - 1] : cpuLastMove.position;
+        console.log('down')
+    } else return true;
+
+}
+
+function recruitDifficulty() {
+    let approved = false;
+    while(!approved) {
+        let x = rng(userSizeChoice);
+        let y = rng(userSizeChoice);
+        let target = playerState[y][x];
+        if (target === 2 || target === 3) continue;
+        cpuLastMove.position = target === 1 ? [y, x] : cpuLastMove.position;
+        playerState[y][x] = target ? 3 : 2 ;
+        approved = true;
+    }
+}
+
 function winnerScreen() {
-    clearAll();
-    createButton('Restart');
-    createWinnerScreen();
+    clearControls();
+    clearMessage();
+    createButton('restart');
+    document.getElementById('restart-button').addEventListener('click', function() {window.location.reload()})
+    if (winner === 'cpu'){
+        createMessage('All Your Ships Have Been Sunk. You Lose!');
+    } else {
+        createMessage('You Sunk All Their Ships. You Win!');
+    }
 
 
 }
-
-function createWinnerScreen() {
-    newDiv
-}
-
 
 function getDifficulty() {
     difficultyOptions.forEach(option => {
@@ -275,24 +355,11 @@ function playerFire(evt) {
     } else if (statePosition === 1) {
         cpuState[yx[0]][yx[1]] = 3; //hit
     }
-    checkWin();
-    cpuFire();
-}
-
-// Loops to find a valid position and changes boat to hit or node to miss
-// Then checks win and renders state
-function cpuFire() {
-    let approved = false;
-    while(!approved) {
-        let x = rng(userSizeChoice);
-        let y = rng(userSizeChoice);
-        let target = playerState[y][x];
-        if (target === 2 || target === 3) continue;
-        playerState[y][x] = target ? 3 : 2 ;
-        approved = true;
-    }
-    checkWin();
     render();
+    checkWin();
+    if (winner) return winnerScreen();
+    cpuFire();
+
 }
 
 // Match the Dom board to the game state ship positions
@@ -378,6 +445,24 @@ function setShipPositions(state) {
 // Returns random number between 0 - (num - 1) for random functions
 function rng(num) {
     return Math.floor(Math.random() * num);
+}
+
+function validShot(state, y, x) {
+    let check = false;
+    if (x >= 0 &&
+        x < state[0].length &&
+        y >= 0 &&
+        y < state.length) {
+    node = state[y][x];
+    console.log(y, x, node)
+    if (node === 0 || node === 1) {
+        check = true} else check = false;
+    }
+    return check;
+}
+
+function shoot(target) {
+    return target = target ? 3 : 2;
 }
 
 // Clears all elements from the main game area to allow to switch game display
