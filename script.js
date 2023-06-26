@@ -1,7 +1,8 @@
 // constants
+const messageSection = document.querySelector('#message-section');
 const mainSection = document.querySelector('main');
-const rootVars = document.querySelector(':root');
 const controlsSection = document.querySelector('#controls-section');
+const rootVars = document.querySelector(':root');
 const startButton = document.getElementById('start-game');
 const nameInput = document.querySelector('#name-input');
 const sizeSlider = document.querySelector('#board-slider');
@@ -40,12 +41,22 @@ let placementBoard;
 // Pressing the start game button stores the user values. Then it clears main and creates ship placement screen 
 startButton.addEventListener('click', startGame);
 
+function winnerScreen() {
+    clearAll();
+    createButton('Restart');
+    createWinnerScreen();
+
+
+}
+
+function createWinnerScreen() {
+    newDiv
+}
 
 // Starts the main game, adds relevent event listeners, variables, game boards, cpu state etc.
 function init() {
     if (document.getElementById('ship-container').innerHTML !== '') return
-    clearMain();
-    clearControls();
+    clearAll();
     createButton('surrender');
     document.getElementById('surrender-button').addEventListener('click', function() {window.location.reload()});
 
@@ -56,9 +67,7 @@ function init() {
     
     cpuState = createState(userSizeChoice);
     setShipPositions(cpuState);
-
-    // randomShips(playerState, shipsArray);
-    // randomShips(cpuState, shipsArray);  
+ 
     cpuBoard.addEventListener('click', playerFire);
     render();
 }
@@ -128,6 +137,13 @@ function createButton(name) {
     controlsSection.append(newButton);
 }
 
+// Helps to create messages without repeated code
+function createMessage(message) {
+    let newMessage = document.createElement('h2');
+    newMessage.innerText = message;
+    messageSection.append(newMessage);
+}
+
 // Create a board, create ships, create buttons and init player game state to place ships into
 function createShipMenu() {
     placementBoard = createBoard('placement', userSizeChoice);
@@ -171,9 +187,7 @@ function startGame() {
     for (let i = 0; i < shipSlider.value; i++){
     shipsArray.splice(2, 0, 3)
     }
-    
-    clearMain();
-    startButton.remove();
+    clearAll();
     createShipMenu();
 } 
 
@@ -349,13 +363,23 @@ function rng(num) {
 
 // Clears all elements from the main game area to allow to switch game display
 function clearMain() {
-    const mainEls = document.querySelectorAll('main > *');
-    mainEls.forEach((el) => el.remove());
+    document.querySelectorAll('main > *').forEach((el) => el.remove());
+
 }
 
 // Clears all elements from controls section
 function clearControls() {
-    const buttons = document.querySelectorAll('#controls-section > *');
-    buttons.forEach(el => el.remove())
+    document.querySelectorAll('#controls-section > *').forEach(el => el.remove());
 }
 
+// Clears all elements from message section
+function clearMessage() {
+    document.querySelectorAll('#message-section > *').forEach(el => el.remove());
+}
+
+// Calls clear main, clear contols and clear message 
+function clearAll() {
+    clearMessage();
+    clearMain();
+    clearControls();
+}

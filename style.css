@@ -30,6 +30,9 @@ section {
     height: 5vmin;
     background-color: antiquewhite;
     padding: 2vmin;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 main {
@@ -43,6 +46,13 @@ main {
 h1 {
     font-size: 8vmin;
     font-family: 'Bebas Neue', sans-serif;
+}
+
+h2 {
+    font-size: 5vmin;
+    color: black;
+    margin: 0;
+    font-family: 'Fjalla One', sans-serif;
 }
 
 .board {
@@ -63,8 +73,6 @@ h1 {
     background-color: lightblue;
     border: solid black 1px;
 }
-
-
 
 #cpu-board > .ship:hover {
     background-color: #888;
@@ -144,11 +152,6 @@ input:hover {
     cursor: auto;
 }
 
-#controls-section {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-}
 
 button {
     height: 7vmin;
@@ -162,7 +165,6 @@ button {
 .placement-ship {
     background-color: #555;
     border: solid black 1px;
-
 }
 
 .placement-ship:hover {
@@ -182,6 +184,7 @@ button {
 
 #ship-container {
     border: solid black 1vmin;
+    border-radius: 10%;
     height: 50vmin;
     width: 50vmin;
     display: flex;
@@ -212,5 +215,5 @@ button {
 
 .selected-ship {
     background-color: #333;
-    border: solid 0.2vmin ;
+    border: solid 0.2vmin coral;
 }
