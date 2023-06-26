@@ -7,6 +7,7 @@ const startButton = document.getElementById('start-game');
 const nameInput = document.querySelector('#name-input');
 const sizeSlider = document.querySelector('#board-slider');
 const shipSlider = document.querySelector('#ship-slider');
+const difficultyOptions = document.querySelectorAll('.difficulty');
 
 // Each ship stored in object to reference the lengths
 const ships = {
@@ -22,7 +23,8 @@ const shipsArray = [ships.carrier, ships.battleship, ships.submarine, ships.dest
 
 
 // Variables
-let username;
+let difficulty;
+let username; // Default name
 let userSizeChoice; //over 10 breaks game
 let boardSize;
 let playerBoard;
@@ -53,6 +55,13 @@ function createWinnerScreen() {
     newDiv
 }
 
+
+function getDifficulty() {
+    difficultyOptions.forEach(option => {
+        if (option.checked) difficulty = option.value;
+    })
+}
+
 // Starts the main game, adds relevent event listeners, variables, game boards, cpu state etc.
 function init() {
     if (document.getElementById('ship-container').innerHTML !== '') return
@@ -75,6 +84,13 @@ function init() {
 // Renders the state of game to the DOM
 function render() {
     renderBoard();
+    renderMessage();
+}
+
+function renderMessage() {
+    clearMessage();
+    if (PlayersTurn) {createMessage('Take Your Shot')}
+    else createMessage('Computers Shot');
 }
 
 // selects the clicked ship and gets the length ready to be added 
@@ -184,11 +200,14 @@ function createShips(){
 function startGame() {
     username = nameInput.value;
     userSizeChoice = sizeSlider.value;
+    difficulty = getDifficulty();
+    if (!username) username = 'Batty Boy'
     for (let i = 0; i < shipSlider.value; i++){
-    shipsArray.splice(2, 0, 3)
-    }
+        shipsArray.splice(2, 0, 3)
+        }
     clearAll();
     createShipMenu();
+    createMessage('Place Your Ships');
 } 
 
 // The player name and state passed in are opposite as it checks the board you are firing at

@@ -17,6 +17,7 @@ html, body {
     justify-content: space-between;
 }
 
+
 header, footer {
     background-color: #333;
     height: 10vh;
@@ -24,6 +25,25 @@ header, footer {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+footer {
+    justify-content: space-between;
+    font-family: sans-serif;
+}
+
+#icons {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 2vmin;
+}
+
+#icons > * {
+    height: 5vmin;
+
+    margin: 1vmin;
+    fill: white;
 }
 
 section {
@@ -53,6 +73,10 @@ h2 {
     color: black;
     margin: 0;
     font-family: 'Fjalla One', sans-serif;
+}
+
+h4 {
+    margin: 5vmin;
 }
 
 .board {
