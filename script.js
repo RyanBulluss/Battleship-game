@@ -60,21 +60,49 @@ startButton.addEventListener('click', startGame);
 // Then checks win and renders state
 function cpuFire() {
 
-    let regular = regularDifficulty()
-    if (regular) {
-        recruitDifficulty();
-        console.log('down')
+    let veteran = VeteranDifficulty();
+    if (!veteran) {
+        let regular = regularDifficulty()
+        console.log('reg')
+    
+        if (!regular) {
+            recruitDifficulty();
+            console.log('recruit')
+        }
     }
-    console.log('down')
+    
+
 
     render();
     checkWin();
     if (winner) return winnerScreen();
 }
 
+function VeteranDifficulty() {
+    if (difficulty === 'recruit' || difficulty === 'regular') return false
+    let roll = rng(4) > 1;
+    let approved = false;
+    if (roll) {
+        let remainingShips = [];
+        playerState.forEach((arr, colIdx) => {
+            arr.forEach((node, rowIdx) => {
+                if (node === 1) remainingShips.push([colIdx, rowIdx])
+            }
+        )})
+        let randomNode = remainingShips[rng(remainingShips.length)]
+        playerState[randomNode[0]][randomNode[1]] = 3
+        console.log([randomNode[0]][randomNode[1]]);
+        cpuLastMove.hit = true;
+        cpuLastMove.position = [randomNode[0], randomNode[1]];
+        approved = true;
+        console.log('vet')
+    }
+    return approved;
+}
 
 function regularDifficulty() {
-
+    if (difficulty === 'recruit') return false
+    let approved = false;
     let y = cpuLastMove.position[0];
     let x = cpuLastMove.position[1];
     if (validShot(playerState, y + 1, x)) {
@@ -83,29 +111,30 @@ function regularDifficulty() {
         playerState[y + 1][x] = target === 1 ? 3 : 2;
         cpuLastMove.hit = target === 1 ? true : false;
         cpuLastMove.position = target === 1 ? [y + 1, x] : cpuLastMove.position;
-        console.log('down')
+        approved = true;
     } else if (validShot(playerState, y - 1, x)) {
         let target = playerState[y - 1][x]
         playerState[y - 1][x] = target === 0 ? 3 : 2;
         playerState[y - 1][x] = target === 1 ? 3 : 2;
         cpuLastMove.hit = target === 1 ? true : false;
         cpuLastMove.position = target === 1 ? [y - 1, x] : cpuLastMove.position;
-        console.log('down')
+        approved = true;
     } else if (validShot(playerState, y, x + 1)) {
         let target = playerState[y][x + 1]
         playerState[y][x + 1] = target === 0 ? 3 : 2;
         playerState[y][x + 1] = target === 1 ? 3 : 2;
         cpuLastMove.hit = target === 1 ? true : false;
         cpuLastMove.position = target === 1 ? [y, x + 1] : cpuLastMove.position;
-        console.log('down')
+        approved = true;
     } else if (validShot(playerState, y, x - 1)) {
         let target = playerState[y][x - 1]
         playerState[y][x - 1] = target === 0 ? 3 : 2;
         playerState[y][x - 1] = target === 1 ? 3 : 2;
         cpuLastMove.hit = target === 1 ? true : false;
         cpuLastMove.position = target === 1 ? [y, x - 1] : cpuLastMove.position;
-        console.log('down')
-    } else return true;
+        approved = true;
+    }
+    return approved;
 
 }
 
@@ -138,7 +167,7 @@ function winnerScreen() {
 
 function getDifficulty() {
     difficultyOptions.forEach(option => {
-        if (option.checked) difficulty = option.value;
+        if (option.checked) difficulty = option.id;
     })
 }
 
@@ -280,7 +309,7 @@ function createShips(){
 function startGame() {
     username = nameInput.value;
     userSizeChoice = sizeSlider.value;
-    difficulty = getDifficulty();
+    getDifficulty();
     if (!username) username = 'Batty Boy'
     for (let i = 0; i < shipSlider.value; i++){
         shipsArray.splice(2, 0, 3)

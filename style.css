@@ -8,7 +8,7 @@ html, body {
     box-sizing: border-box;
     overflow: hidden;
     height: 100%;
-    background-color: #999;
+    background-color: #a1b1c1;
     color: white;
     margin: 0;
     padding: 0;
@@ -48,7 +48,8 @@ footer {
 
 section {
     height: 5vmin;
-    background-color: antiquewhite;
+    background-color: #373F47;
+    color: white;
     padding: 2vmin;
     display: flex;
     justify-content: space-evenly;
@@ -70,7 +71,6 @@ h1 {
 
 h2 {
     font-size: 5vmin;
-    color: black;
     margin: 0;
     font-family: 'Fjalla One', sans-serif;
 }
@@ -80,22 +80,22 @@ h4 {
 }
 
 .board {
-    background-color: black;
+    background-color: #3772FF;
     width: 50vmin;
     height: 50vmin;
     margin: 2vmin;
     display: grid;
     grid-template-columns: repeat(var(--board-size), 1fr);
     grid-template-rows: repeat(var(--board-size), 1fr);
-    gap: 0.5vmin;
+    gap: 1vmin;
     padding: 0.5vmin;
     border: solid black 0.25vmin;
 
 }
 
 #cpu-board > .ship {
-    background-color: lightblue;
-    border: solid black 1px;
+    background-color: #3772dd;
+    border-radius: 0;
 }
 
 #cpu-board > .ship:hover {
@@ -104,9 +104,7 @@ h4 {
 }
 
 .node {
-    background-color: lightblue;
-    border: solid black 1px;
-
+    background-color: #5599cc ;
 }
 
 #cpu-board >.node:hover{
@@ -115,8 +113,13 @@ h4 {
 }
 
 .ship {
-    background-color: #555;
-    border: solid black 1px;
+    background-color: #848482;
+
+    border: 0.1vmin black solid;
+}
+
+.ship-end {
+    
 }
 
 #cpu-board > .ship:hover {
@@ -126,12 +129,12 @@ h4 {
 
 .miss {
     background-color: blue;
-    border: solid black 1px;
+    border-radius: 100vmin;
 }
 
 .hit {
     background-color: red;
-    border: solid black 1px;
+    border-radius: 100vmin;
 }
 
 #form-div {
@@ -142,7 +145,7 @@ h4 {
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    border: solid black 0.5vmin;
+    border: solid black 0.4vmin;
     border-radius: 20%;
     padding: 5vmin;
     accent-color: blue;
@@ -164,8 +167,9 @@ form > div {
 
 
 button:hover {
-    background-color: lightblue;
+    background-color: #f88;
     cursor: pointer;
+    color: black;
 }
 
 input:hover {
@@ -182,13 +186,15 @@ button {
     width: 20vmin;
     border-radius: 10vmin;
     font-size: 2vmin;
-    background-color: steelblue;
+    background-color: #BA274A;
     color: white;
 }
 
 .placement-ship {
-    background-color: #555;
-    border: solid black 1px;
+    background-color: #848482;
+    border: 0.1vmin black solid;
+    border-radius: 100vmin 100vmin 50vmin 50vmin;
+    margin: 0.4vmin;
 }
 
 .placement-ship:hover {
@@ -202,12 +208,9 @@ button {
     cursor: pointer;
 }
 
-#placement-ship::after {
-    background-color: #222;
-}
-
 #ship-container {
     border: solid black 1vmin;
+
     border-radius: 10%;
     height: 50vmin;
     width: 50vmin;
@@ -239,5 +242,6 @@ button {
 
 .selected-ship {
     background-color: #333;
-    border: solid 0.2vmin coral;
+    border: solid 0.1vmin white;
+    border-radius: 100vmin;
 }
