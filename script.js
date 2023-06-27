@@ -81,7 +81,7 @@ function cpuFire() {
 
 function VeteranDifficulty() {
     if (difficulty === 'recruit' || difficulty === 'regular') return false
-    let roll = rng(4) > 1;
+    let roll = rng(4) > 2;
     let approved = false;
     if (roll) {
         let remainingShips = [];

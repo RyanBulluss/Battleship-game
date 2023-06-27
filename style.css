@@ -2,13 +2,15 @@
     --board-size: 7;
 }
 
-html, body {
+html
+
+body {
     font-family: "Permanent Marker", cursive;
     font-size: 2.5vmin;
     box-sizing: border-box;
     overflow: hidden;
-    height: 100%;
-    background-image: linear-gradient(to bottom, #676F77, #777f87);
+    height: 100vh;
+    background-color: #676F77;
     color: white;
     margin: 0;
     padding: 0;
@@ -16,7 +18,6 @@ html, body {
     flex-direction: column;
     justify-content: space-between;
 }
-
 
 header, footer {
     background-color: #333;
@@ -28,7 +29,10 @@ header, footer {
 }
 
 footer {
+    height: 5vh;
+    font-size: 2vmin;
     justify-content: space-between;
+    align-items: center;
     font-family: sans-serif;
 }
 
@@ -40,7 +44,7 @@ footer {
 }
 
 #icons > * {
-    height: 5vmin;
+    height: 3vmin;
 
     margin: 1vmin;
     fill: white;
@@ -48,7 +52,7 @@ footer {
 
 section {
     height: 5vmin;
-    background-color: #373F47;
+    background-color: #676F77;
     color: white;
     padding: 2vmin;
     display: flex;
@@ -57,7 +61,7 @@ section {
 }
 
 #controls-section {
-    height: 6vmin;
+    margin: 1vmin;
 }
 
 main {
@@ -85,20 +89,20 @@ h4 {
 
 .board {
     background-color: black;
-    width: 50vmin;
-    height: 50vmin;
+    width: 60vmin;
+    height: 60vmin;
     margin: 2vmin;
     display: grid;
     grid-template-columns: repeat(var(--board-size), 1fr);
     grid-template-rows: repeat(var(--board-size), 1fr);
     gap: 0.2vmin;
-    border: solid black 0.5vmin;
-    border-radius: 2%;
+    border: solid black 0.3vmin;
+    border-radius: 1%;
 }
 
 #cpu-board > .ship {
     background-image: linear-gradient(to top, #55aaFF, #55aaFF);
-    border-radius: 10%;
+    border-radius: 5%;
     border: #222 solid 0.2vmin;
 }
 
@@ -110,7 +114,7 @@ h4 {
 
 .node {
     background-color: #55aaFF;
-    border-radius: 10%;
+    border-radius: 5%;
     border: #222 solid 0.2vmin;
 }
 
@@ -121,7 +125,7 @@ h4 {
 
 .ship {
     background-color: #454545;
-    border-radius: 10%;
+    border-radius: 5%;
     border: #222 solid 0.2vmin;
 
 }
@@ -135,14 +139,14 @@ h4 {
 .miss {
     background-image: linear-gradient(to top, #4444dd, #3333cc, #222C77);
     border: #222 solid 0.2vmin;
-    border-radius: 10%;
+    border-radius: 5%;
 
 }
 
 .hit {
     background-image: linear-gradient(to top, #ff4444, #ff1111, #cc1111);
     border: #222 solid 0.2vmin;
-    border-radius: 10%;
+    border-radius: 5%;
 
 }
 
@@ -152,12 +156,12 @@ h4 {
 #form-div {
     background-color: #333;
     width: 30vmin;
-    height: 50vmin;
+    height: 60vmin;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    border: solid black 0.5vmin;
+    border: solid black 0.3vmin;
     border-radius: 2vmin;
     accent-color: #ffaa33;
 }
@@ -190,6 +194,7 @@ input:hover {
 button {
     height: 7vmin;
     width: 20vmin;
+
     border-radius: 10vmin;
     font-size: 0.1vmin;
     background-color:#ffaa33;
@@ -197,6 +202,7 @@ button {
     border: 0;
     font-weight: 700;
     font-size: 2.5vmin;
+    border: solid black 0.2vmin;
 }
 
 button:hover {
@@ -223,11 +229,11 @@ button:hover {
 }
 
 #ship-container {
-    border: solid black 0.5vmin;
+    border: solid black 0.3vmin;
     background-color: #99ccFF;
     border-radius: 2vmin;
-    height: 50vmin;
-    width: 50vmin;
+    height: 60vmin;
+    width: 60vmin;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -255,8 +261,8 @@ button:hover {
 }
 
 .selected-ship {
-    background-color: #333;
-    border: solid 0.3vmin #ffaa33;
+    background-color: #555;
+    border: solid 0.3vmin #fc1;
     border-radius: 2vmin;
     margin: 0.5vmin;
 }
