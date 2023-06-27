@@ -5,12 +5,10 @@
 html
 
 body {
-    font-family: "Permanent Marker", cursive;
-    font-size: 2.5vmin;
-    box-sizing: border-box;
-    overflow: hidden;
+    font-family: cursive;
+    font-size: 2vmin;
     height: 100vh;
-    background-color: #676F77;
+    background-color: #789;
     color: white;
     margin: 0;
     padding: 0;
@@ -52,7 +50,6 @@ footer {
 
 section {
     height: 5vmin;
-    background-color: #676F77;
     color: white;
     padding: 2vmin;
     display: flex;
@@ -96,12 +93,12 @@ h4 {
     grid-template-columns: repeat(var(--board-size), 1fr);
     grid-template-rows: repeat(var(--board-size), 1fr);
     gap: 0.2vmin;
-    border: solid black 0.3vmin;
+    border: solid black 0.4vmin;
     border-radius: 1%;
 }
 
 #cpu-board > .ship {
-    background-image: linear-gradient(to top, #55aaFF, #55aaFF);
+    background-color: #55aaFF;
     border-radius: 5%;
     border: #222 solid 0.2vmin;
 }
@@ -124,16 +121,10 @@ h4 {
 }
 
 .ship {
-    background-color: #454545;
+    background-color: #444;
     border-radius: 5%;
     border: #222 solid 0.2vmin;
 
-}
-
-
-#cpu-board > .ship:hover {
-    background-color: #888;
-    cursor: pointer;
 }
 
 .miss {
@@ -167,10 +158,15 @@ h4 {
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: start;
-    border: solid black 0.3vmin;
+    border: solid black 0.4vmin;
     border-radius: 2vmin;
     accent-color: #ffaa33;
     float: left;
+    margin: 2vmin;
+}
+
+strong {
+    font-size: 2.5vmin;
 }
 
 form {
@@ -187,7 +183,18 @@ form > div {
 
 } 
 
+input[type=range] {
+    appearance: none; 
+    background-color: #222;
+    width: 100%;
+    outline: none;
+    border-radius: 2vmin;
+}
 
+.difficulty {
+
+    height: 2vmin;
+}
 
 input:hover {
     cursor: pointer;
@@ -209,7 +216,7 @@ button {
     border: 0;
     font-weight: 700;
     font-size: 2.5vmin;
-    border: solid black 0.2vmin;
+    border: solid black 0.3vmin;
 }
 
 button:hover {
@@ -218,7 +225,7 @@ button:hover {
 }
 
 .placement-ship {
-    background-color: #454545;
+    background-color: #444;
     border: 0.3vmin black solid;
     border-radius: 2vmin;
     margin: 0.5vmin;
@@ -236,8 +243,7 @@ button:hover {
 }
 
 #ship-container {
-    border: solid black 0.3vmin;
-    background-color: #99ccFF;
+    border: solid black 0.4vmin;
     border-radius: 2vmin;
     height: 60vmin;
     width: 60vmin;
@@ -269,7 +275,7 @@ button:hover {
 
 .selected-ship {
     background-color: #555;
-    border: solid 0.3vmin #fc1;
+    border: solid 0.3vmin #ddd;
     border-radius: 2vmin;
     margin: 0.5vmin;
 }

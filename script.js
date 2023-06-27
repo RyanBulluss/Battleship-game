@@ -92,15 +92,10 @@ function cpuFire() {
     let veteran = VeteranDifficulty();
     if (!veteran) {
         let regular = regularDifficulty()
-        console.log('reg')
-    
         if (!regular) {
             recruitDifficulty();
-            console.log('recruit')
         }
     }
-    
-
     checkWin();
     render();
 
@@ -124,7 +119,6 @@ function VeteranDifficulty() {
         cpuLastMove.hit = true;
         cpuLastMove.position = [randomNode[0], randomNode[1]];
         approved = true;
-        console.log('vet')
     }
     return approved;
 }
@@ -209,8 +203,8 @@ function init() {
 
     playing = true;
     boardSize = userSizeChoice * userSizeChoice;
-    cpuBoard = createBoard('cpu', userSizeChoice);
     playerBoard = createBoard('player', userSizeChoice);
+    cpuBoard = createBoard('cpu', userSizeChoice);
     
     cpuState = createState(userSizeChoice);
     setShipPositions(cpuState);
@@ -507,7 +501,6 @@ function validShot(state, y, x) {
         y >= 0 &&
         y < state.length) {
     node = state[y][x];
-    console.log(y, x, node)
     if (node === 0 || node === 1) {
         check = true} else check = false;
     }
