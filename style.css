@@ -150,27 +150,34 @@ h4 {
 
 }
 
+#board-input {
+    float: right;
+}
 
+#ships-input {
+    float: right;
+}
 
 
 #form-div {
     background-color: #333;
-    width: 30vmin;
+    width: 40vmin;
     height: 60vmin;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    align-items: center;
+    align-items: start;
     border: solid black 0.3vmin;
     border-radius: 2vmin;
     accent-color: #ffaa33;
+    float: left;
 }
 
 form {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    width: 80%;
+    width: 60%;
     height: 30%;
 }
 
@@ -242,22 +249,22 @@ button:hover {
 
 #ship-5 {
     height: 30vmin;
-    width: 5vmin;
+    width: 6vmin;
 }
 
 #ship-4 {
     height: 24vmin;
-    width: 5vmin;
+    width: 6vmin;
 }
 
 #ship-3 {
     height: 18vmin;
-    width: 5vmin;
+    width: 6vmin;
 }
 
 #ship-2 {
     height: 12vmin;
-    width: 5vmin;
+    width: 6vmin;
 }
 
 .selected-ship {

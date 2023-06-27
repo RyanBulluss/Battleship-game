@@ -9,6 +9,7 @@ const sizeSlider = document.querySelector('#board-slider');
 const shipSlider = document.querySelector('#ship-slider');
 const difficultyOptions = document.querySelectorAll('.difficulty');
 
+
 // Each ship stored in object to reference the lengths
 const ships = {
     carrier: 5,
@@ -19,7 +20,7 @@ const ships = {
 }
 
 // Ships in an array to make looping over them easier
-const shipsArray = [ships.carrier, ships.battleship, ships.submarine, ships.destroyer];
+let shipsArray = [ships.carrier, ships.battleship, ships.submarine, ships.destroyer];
 
 
 // Variables
@@ -47,6 +48,33 @@ let cpuLastMove = {
 // Pressing the start game button stores the user values. Then it clears main and creates ship placement screen 
 startButton.addEventListener('click', startGame);
 window.addEventListener('load', createShips);
+
+shipSlider.addEventListener('input', function(e) {
+    shipsArray = shipsArray.filter(ship => ship !== 3 && ship !== 2);
+    for(let i = 0; i < this.value; i++){
+        shipsArray.splice(2, 0, 3);
+    }
+    shipsArray.push(2);
+    document.querySelectorAll('#ship-container > *').forEach(el => el.remove())
+    shipsArray.forEach(ship => {
+        let newShip = document.createElement('div');
+        newShip.id = `ship-${ship}`;
+        newShip.className = 'placement-ship';
+        document.getElementById('ship-container').append(newShip);
+    })
+    document.getElementById('ships-input').innerText = shipsArray.length;
+})
+
+sizeSlider.addEventListener('input', function(e) {
+    document.getElementById('board-input').innerText = `${this.value} x ${this.value}`;
+})
+
+
+
+
+
+
+
 
 
 
@@ -301,7 +329,6 @@ function createShips(){
         let newShip = document.createElement('div');
         newShip.id = `ship-${length}`;
         newShip.className = 'placement-ship';
-        // newShip.setAttribute('draggable', 'true'); change to drag and drop later
         newDiv.append(newShip);
     })
 }
@@ -310,10 +337,6 @@ function createShips(){
 function startGame() {
     userSizeChoice = sizeSlider.value;
     getDifficulty();
-    if (!username) username = 'Batty Boy'
-    for (let i = 0; i < shipSlider.value; i++){
-        shipsArray.splice(2, 0, 3)
-        }
     clearAll();
     createShipMenu();
     createMessage('Place Your Ships');

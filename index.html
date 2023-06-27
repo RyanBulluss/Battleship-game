@@ -19,14 +19,14 @@
     <main>
         <div id="form-div">
             <form>
-                <label for="slider">Board Size:</label>
-                <input type="range" min="6" max="10" id="board-slider">
+                <label for="slider">Board Size: <span id="board-input">6 x 6</span></label>
+                <input type="range" min="6" max="10" value="6" id="board-slider">
             </form>
             <form>
                 <label>Difficulty:</label>
                 <div>
                     <label>Recruit</label>
-                    <input type="radio" class="difficulty" name="difficulty" id="recruit" checked="true">
+                    <input type="radio" class="difficulty" name="difficulty" id="recruit">
                 </div>
                 <div>
                     <label>Regular</label>
@@ -34,12 +34,12 @@
                 </div>
                 <div>
                     <label>Veteran</label>
-                    <input type="radio" class="difficulty" name="difficulty" id="veteran">
+                    <input type="radio" class="difficulty" name="difficulty" id="veteran" checked="true">
                 </div>
             </form>
             <form>
-                <label for="slider">Ships:</label>
-                <input type="range" min="0" max="5" id="ship-slider">
+                <label for="slider">Ships: <span id="ships-input">4</span></label>
+                <input type="range" min="1" max="4" value="0" id="ship-slider">
             </form>
             
         </div>
