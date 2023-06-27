@@ -8,7 +8,7 @@ html, body {
     box-sizing: border-box;
     overflow: hidden;
     height: 100%;
-    background-color: #a1b1c1;
+    background-image: linear-gradient(to bottom, #676F77, #777f87);
     color: white;
     margin: 0;
     padding: 0;
@@ -80,31 +80,34 @@ h4 {
 }
 
 .board {
-    background-color: #3772FF;
+    background-color: black;
     width: 50vmin;
     height: 50vmin;
     margin: 2vmin;
     display: grid;
     grid-template-columns: repeat(var(--board-size), 1fr);
     grid-template-rows: repeat(var(--board-size), 1fr);
-    gap: 1vmin;
-    padding: 0.5vmin;
-    border: solid black 0.25vmin;
-
+    gap: 0.2vmin;
+    border: solid black 0.5vmin;
+    border-radius: 2%;
 }
 
 #cpu-board > .ship {
-    background-color: #3772dd;
-    border-radius: 0;
+    background-image: linear-gradient(to top, #55aaFF, #55aaFF);
+    border-radius: 10%;
+    border: #222 solid 0.2vmin;
 }
 
 #cpu-board > .ship:hover {
     background-color: #888;
     cursor: pointer;
+    border: #222 solid 0.2vmin;
 }
 
 .node {
-    background-color: #5599cc ;
+    background-color: #55aaFF;
+    border-radius: 10%;
+    border: #222 solid 0.2vmin;
 }
 
 #cpu-board >.node:hover{
@@ -113,14 +116,12 @@ h4 {
 }
 
 .ship {
-    background-color: #848482;
+    background-color: #454545;
+    border-radius: 10%;
+    border: #222 solid 0.2vmin;
 
-    border: 0.1vmin black solid;
 }
 
-.ship-end {
-    
-}
 
 #cpu-board > .ship:hover {
     background-color: #888;
@@ -128,27 +129,34 @@ h4 {
 }
 
 .miss {
-    background-color: blue;
-    border-radius: 100vmin;
+    background-image: linear-gradient(to top, #4444dd, #3333cc, #222C77);
+    border: #222 solid 0.2vmin;
+    border-radius: 10%;
+
 }
 
 .hit {
-    background-color: red;
-    border-radius: 100vmin;
+    background-image: linear-gradient(to top, #ff4444, #ff1111, #cc1111);
+    border: #222 solid 0.2vmin;
+    border-radius: 10%;
+
 }
 
+
+
+
 #form-div {
-    background-color: #555;
-    width: 60vmin;
+    background-color: #333;
+    width: 50vmin;
     height: 45vmin;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    border: solid black 0.4vmin;
+    border: solid black 0.2vmin;
     border-radius: 20%;
     padding: 5vmin;
-    accent-color: blue;
+    accent-color: #ffaa33;
 }
 
 form {
@@ -162,6 +170,7 @@ form {
 form > div {
     display: flex;
     justify-content: space-between;
+
 } 
 
 
@@ -186,14 +195,17 @@ button {
     width: 20vmin;
     border-radius: 10vmin;
     font-size: 2vmin;
-    background-color: #BA274A;
+    background-color:#ffaa33;
     color: white;
+    border: 0;
+    font-weight: 700;
+    font-size: 2.5vmin;
 }
 
 .placement-ship {
-    background-color: #848482;
+    background-color: #454545;
     border: 0.1vmin black solid;
-    border-radius: 100vmin 100vmin 50vmin 50vmin;
+    border-radius: 2vmin;
     margin: 0.4vmin;
 }
 
@@ -210,8 +222,7 @@ button {
 
 #ship-container {
     border: solid black 1vmin;
-
-    border-radius: 10%;
+    border-radius: 2vmin;
     height: 50vmin;
     width: 50vmin;
     display: flex;
@@ -242,6 +253,7 @@ button {
 
 .selected-ship {
     background-color: #333;
-    border: solid 0.1vmin white;
-    border-radius: 100vmin;
+    border: solid 0.2vmin white;
+    border-radius: 2vmin;
+    margin: 0.4vmin;
 }

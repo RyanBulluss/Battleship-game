@@ -46,6 +46,7 @@ let cpuLastMove = {
 
 // Pressing the start game button stores the user values. Then it clears main and creates ship placement screen 
 startButton.addEventListener('click', startGame);
+window.addEventListener('load', createShips);
 
 
 
@@ -295,7 +296,7 @@ function rotateShips() {
 function createShips(){
     let newDiv = document.createElement('div');
     newDiv.id = 'ship-container';
-    mainSection.prepend(newDiv);
+    mainSection.append(newDiv);
     shipsArray.forEach(length => {
         let newShip = document.createElement('div');
         newShip.id = `ship-${length}`;
@@ -307,7 +308,6 @@ function createShips(){
 
 // Pressing the start game button stores the user values. Then it clears main and creates ship placement screen 
 function startGame() {
-    username = nameInput.value;
     userSizeChoice = sizeSlider.value;
     getDifficulty();
     if (!username) username = 'Batty Boy'
@@ -418,6 +418,7 @@ function renderOneBoard(board, state) {
 function renderBoard() {
     renderOneBoard(playerBoard, playerState);
     renderOneBoard(cpuBoard, cpuState);
+    
 } 
 
 // Takes a game state and a ship to put on that game state. Changes the values in the positions to 1
