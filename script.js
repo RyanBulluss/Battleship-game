@@ -25,7 +25,7 @@ let shipsArray = [ships.carrier, ships.battleship, ships.submarine, ships.destro
 
 // Variables
 let difficulty;
-let username; // Default name
+let username = 'Ryan'; // Default name
 let userSizeChoice; //over 10 breaks game
 let boardSize;
 let playerBoard;
@@ -101,9 +101,9 @@ function cpuFire() {
     }
     
 
-
-    render();
     checkWin();
+    render();
+
     if (winner) return winnerScreen();
 }
 
@@ -407,8 +407,8 @@ function playerFire(evt) {
     } else if (statePosition === 1) {
         cpuState[yx[0]][yx[1]] = 3; //hit
     }
-    render();
     checkWin();
+    render();
     if (winner) return winnerScreen();
     cpuFire();
 
