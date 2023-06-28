@@ -100,7 +100,27 @@ function winnerScreen() {
 
 
 
+function regularDifficulty() {
+    if (difficulty === 'recruit') return false
+    let y = cpuLastMove.position[0];
+    let x = cpuLastMove.position[1];
 
+    function checkAdjacent(state, y, x) {
+        if (!validShot(state, y, x)) return false;
+        let target = state[y][x]
+        state[y][x] = target === 0 ? 3 : 2;
+        state[y][x] = target === 1 ? 3 : 2;
+        cpuLastMove.hit = target === 1 ? true : false;
+        cpuLastMove.position = target === 1 ? [y, x] : cpuLastMove.position;
+        return true;
+    }
+    
+    if (checkAdjacent(playerState, y + 1, x)) return true;
+    if (checkAdjacent(playerState, y - 1, x)) return true;
+    if (checkAdjacent(playerState, y, x + 1)) return true;
+    if (checkAdjacent(playerState, y, x - 1)) return true;
+    return false;
+}
 
 
 
@@ -197,43 +217,7 @@ function VeteranDifficulty() {
     return approved;
 }
 
-function regularDifficulty() {
-    if (difficulty === 'recruit') return false
-    let approved = false;
-    let y = cpuLastMove.position[0];
-    let x = cpuLastMove.position[1];
-    if (validShot(playerState, y + 1, x)) {
-        let target = playerState[y + 1][x]
-        playerState[y + 1][x] = target === 0 ? 3 : 2;
-        playerState[y + 1][x] = target === 1 ? 3 : 2;
-        cpuLastMove.hit = target === 1 ? true : false;
-        cpuLastMove.position = target === 1 ? [y + 1, x] : cpuLastMove.position;
-        approved = true;
-    } else if (validShot(playerState, y - 1, x)) {
-        let target = playerState[y - 1][x]
-        playerState[y - 1][x] = target === 0 ? 3 : 2;
-        playerState[y - 1][x] = target === 1 ? 3 : 2;
-        cpuLastMove.hit = target === 1 ? true : false;
-        cpuLastMove.position = target === 1 ? [y - 1, x] : cpuLastMove.position;
-        approved = true;
-    } else if (validShot(playerState, y, x + 1)) {
-        let target = playerState[y][x + 1]
-        playerState[y][x + 1] = target === 0 ? 3 : 2;
-        playerState[y][x + 1] = target === 1 ? 3 : 2;
-        cpuLastMove.hit = target === 1 ? true : false;
-        cpuLastMove.position = target === 1 ? [y, x + 1] : cpuLastMove.position;
-        approved = true;
-    } else if (validShot(playerState, y, x - 1)) {
-        let target = playerState[y][x - 1]
-        playerState[y][x - 1] = target === 0 ? 3 : 2;
-        playerState[y][x - 1] = target === 1 ? 3 : 2;
-        cpuLastMove.hit = target === 1 ? true : false;
-        cpuLastMove.position = target === 1 ? [y, x - 1] : cpuLastMove.position;
-        approved = true;
-    }
-    return approved;
 
-}
 
 function recruitDifficulty() {
     let approved = false;

@@ -46,7 +46,7 @@ footer {
 }
 
 section {
-    height: 4vmin;
+    height: 5vmin;
     color: black;
     padding: 2vmin;
     display: flex;
@@ -80,8 +80,8 @@ h4 {
 
 .board {
     background-color: black;
-    width: 60vmin;
-    height: 60vmin;
+    width: 55vmin;
+    height: 55vmin;
     margin: 2vmin;
     display: grid;
     grid-template-columns: repeat(var(--board-size), 1fr);
@@ -97,8 +97,8 @@ h4 {
 }
 
 #cpu-board > .ship:hover {
-    background-color: #888;
-    cursor: pointer;
+    background-color: #ccc;
+    cursor: crosshair;
     border: #222 solid 0.4vmin;
 }
 
@@ -109,8 +109,8 @@ h4 {
 }
 
 #cpu-board >.node:hover{
-    background-color: #888;
-    cursor: pointer;
+    background-color: #ccc;
+    cursor: crosshair;
 }
 
 .ship {
@@ -146,7 +146,8 @@ h4 {
 #form-div {
     background-color: #333;
     width: 40vmin;
-    height: 60vmin;
+    height: 55vmin;
+    margin: 2vmin;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -204,7 +205,7 @@ label {
 button {
     height: 8vmin;
     width: 20vmin;
-    margin-bottom: 2vmin;
+    margin-bottom: 1vmin;
     border-radius: 10vmin;
     font-size: 0.1vmin;
     background-color:#ff8800;
@@ -240,8 +241,9 @@ button:hover {
 #ship-container {
     border: solid black 0.5vmin;
     border-radius: 2vmin;
-    height: 60vmin;
-    width: 60vmin;
+    width: 55vmin;
+    height: 55vmin;
+    margin: 2vmin;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
