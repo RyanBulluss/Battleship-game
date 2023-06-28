@@ -6,7 +6,7 @@ body {
     font-family: cursive;
     font-size: 2vmin;
     height: 100vh;
-    background-color: #e7e7eF;
+    background-color: #d7d7dF;
     color: white;
     margin: 0;
     padding: 0;
@@ -17,7 +17,7 @@ body {
 
 header, footer {
     background-color: #333;
-    height: 10vh;
+    height: 9vh;
     text-align: center;
     display: flex;
     align-items: center;
@@ -25,7 +25,7 @@ header, footer {
 }
 
 footer {
-    height: 5vh;
+    height: 7vh;
     font-size: 2vmin;
     justify-content: space-between;
     align-items: center;
@@ -40,14 +40,14 @@ footer {
 }
 
 #icons > * {
-    height: 3vmin;
+    height: 4vmin;
 
     margin: 1vmin;
     fill: white;
 }
 
 section {
-    height: 5vmin;
+    height: 4vmin;
     color: black;
     padding: 2vmin;
     display: flex;
@@ -90,27 +90,26 @@ h4 {
     display: grid;
     grid-template-columns: repeat(var(--board-size), 1fr);
     grid-template-rows: repeat(var(--board-size), 1fr);
-    gap: 0.2vmin;
     border: solid black 0.5vmin;
     border-radius: 1%;
 }
 
 #cpu-board > .ship {
-    background-color: #2176FF;
+    background-color: #3186FF;
     border-radius: 5%;
-    border: #222 solid 0.2vmin;
+    border: #222 solid 0.4vmin;
 }
 
 #cpu-board > .ship:hover {
     background-color: #888;
     cursor: pointer;
-    border: #222 solid 0.2vmin;
+    border: #222 solid 0.4vmin;
 }
 
 .node {
-    background-color: #2176FF;
+    background-color: #3186FF;
     border-radius: 5%;
-    border: #222 solid 0.2vmin;
+    border: #222 solid 0.4vmin;
 }
 
 #cpu-board >.node:hover{
@@ -119,22 +118,22 @@ h4 {
 }
 
 .ship {
-    background-color: #8B8982;
+    background-color: #666;
     border-radius: 5%;
-    border: #222 solid 0.2vmin;
+    border: #222 solid 0.4vmin;
 
 }
 
 .miss {
-    background-image: linear-gradient(to top, #2222dd, #3443bc, #222C77);
-    border: #222 solid 0.2vmin;
+    background-image: linear-gradient(to top, #2222dd, #3030bc, #222C77);
+    border: #222 solid 0.4vmin;
     border-radius: 5%;
 
 }
 
 .hit {
-    background-image: linear-gradient(to top, #ff7744, #ff1111, #E3170A);
-    border: #222 solid 0.2vmin;
+    background-image: linear-gradient(to top, #ff5533, #ff1111, #f3170A);
+    border: #222 solid 0.4vmin;
     border-radius: 5%;
 
 }
@@ -204,9 +203,9 @@ input:hover {
 
 
 button {
-    height: 7vmin;
+    height: 8vmin;
     width: 20vmin;
-
+    margin-bottom: 2vmin;
     border-radius: 10vmin;
     font-size: 0.1vmin;
     background-color:#ffaa33;
@@ -223,15 +222,15 @@ button:hover {
 }
 
 .placement-ship {
-    background-color: #8B8982;
+    background-color: #666;
     border: 0.3vmin black solid;
     border-radius: 2vmin;
     margin: 0.5vmin;
 }
 
 .placement-ship:hover {
-    background-color: #222;
-    border: solid black 0.3vmin;
+    background-color: #444;
+    border: solid black 0.4vmin;
     
 }
 
@@ -272,8 +271,8 @@ button:hover {
 }
 
 .selected-ship {
-    background-color: #555;
-    border: solid 0.3vmin #ddd;
+    background-color: #333;
+    border: solid 0.4vmin #fa0;
     border-radius: 2vmin;
     margin: 0.5vmin;
 }
@@ -281,13 +280,13 @@ button:hover {
 .valid-position {
     background-color: green;
     border-radius: 5%;
-    border: #222 solid 0.2vmin;
+    border: #222 solid 0.4vmin;
     cursor: pointer;
 }
 
 .invalid-position {
     background-color: red;
     border-radius: 5%;
-    border: #222 solid 0.2vmin;
+    border: #222 solid 0.4vmin;
     cursor: pointer;
 }
