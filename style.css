@@ -2,13 +2,11 @@
     --board-size: 7;
 }
 
-html
-
 body {
     font-family: cursive;
     font-size: 2vmin;
     height: 100vh;
-    background-color: #789;
+    background-color: #e7e7eF;
     color: white;
     margin: 0;
     padding: 0;
@@ -50,7 +48,7 @@ footer {
 
 section {
     height: 5vmin;
-    color: white;
+    color: black;
     padding: 2vmin;
     display: flex;
     justify-content: space-evenly;
@@ -93,12 +91,12 @@ h4 {
     grid-template-columns: repeat(var(--board-size), 1fr);
     grid-template-rows: repeat(var(--board-size), 1fr);
     gap: 0.2vmin;
-    border: solid black 0.4vmin;
+    border: solid black 0.5vmin;
     border-radius: 1%;
 }
 
 #cpu-board > .ship {
-    background-color: #55aaFF;
+    background-color: #2176FF;
     border-radius: 5%;
     border: #222 solid 0.2vmin;
 }
@@ -110,7 +108,7 @@ h4 {
 }
 
 .node {
-    background-color: #55aaFF;
+    background-color: #2176FF;
     border-radius: 5%;
     border: #222 solid 0.2vmin;
 }
@@ -121,21 +119,21 @@ h4 {
 }
 
 .ship {
-    background-color: #444;
+    background-color: #8B8982;
     border-radius: 5%;
     border: #222 solid 0.2vmin;
 
 }
 
 .miss {
-    background-image: linear-gradient(to top, #4444dd, #3333cc, #222C77);
+    background-image: linear-gradient(to top, #2222dd, #3443bc, #222C77);
     border: #222 solid 0.2vmin;
     border-radius: 5%;
 
 }
 
 .hit {
-    background-image: linear-gradient(to top, #ff4444, #ff1111, #cc1111);
+    background-image: linear-gradient(to top, #ff7744, #ff1111, #E3170A);
     border: #222 solid 0.2vmin;
     border-radius: 5%;
 
@@ -158,7 +156,7 @@ h4 {
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: start;
-    border: solid black 0.4vmin;
+    border: solid black 0.5vmin;
     border-radius: 2vmin;
     accent-color: #ffaa33;
     float: left;
@@ -225,7 +223,7 @@ button:hover {
 }
 
 .placement-ship {
-    background-color: #444;
+    background-color: #8B8982;
     border: 0.3vmin black solid;
     border-radius: 2vmin;
     margin: 0.5vmin;
@@ -243,7 +241,7 @@ button:hover {
 }
 
 #ship-container {
-    border: solid black 0.4vmin;
+    border: solid black 0.5vmin;
     border-radius: 2vmin;
     height: 60vmin;
     width: 60vmin;
@@ -278,4 +276,18 @@ button:hover {
     border: solid 0.3vmin #ddd;
     border-radius: 2vmin;
     margin: 0.5vmin;
+}
+
+.valid-position {
+    background-color: green;
+    border-radius: 5%;
+    border: #222 solid 0.2vmin;
+    cursor: pointer;
+}
+
+.invalid-position {
+    background-color: red;
+    border-radius: 5%;
+    border: #222 solid 0.2vmin;
+    cursor: pointer;
 }

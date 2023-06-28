@@ -72,12 +72,60 @@ sizeSlider.addEventListener('input', function(e) {
 
 
 
+function placementCheck(target) {
+    let firstIndex = target.id.split('');
+    let y = parseInt(firstIndex[0]);
+    let x = parseInt(firstIndex[1]);
+    let valid = true;
+    let shipPositions = []
+    for (let i = 0; i < currentShipLength; i++) {
+        if (angle === 0) {
+            shipPositions.push([y + i, x])
+        } else {
+            shipPositions.push([y, x + i])
+        }
+    }
+
+    // Valid check is true if all positions are within state length and position is empty (0)
+    if (!shipPositions.every(([y, x]) => {
+        return (
+        x >= 0 &&
+        x < userSizeChoice &&
+        y >= 0 &&
+        y < userSizeChoice &&
+        playerState[y][x] === 0
+        )
+    })) valid = false;
+    return [shipPositions, valid];
+}
 
 
 
 
+function hoverEffect(evt) {
+    let target = evt.target;
+    if (!currentShip) return;
+    if (target.id === 'placement-board') return;
+    const checks = placementCheck(target);
+
+    checks[0].forEach(([a, b]) => {
+        document.getElementById(`${a}${b}`).className = checks[1] ? 'valid-position' : 'invalid-position';
+    })
+}
 
 
+
+function unHoverEffect(evt) {
+    let target = evt.target;
+    if (!currentShip) return;
+    if (target.id === 'placement-board') return;
+    const checks = placementCheck(target);
+
+    checks[0].forEach(([a, b]) => {
+        let node = document.getElementById(`${a}${b}`)
+        checkPosition(playerState, a, b, node)
+    })
+}
 
 
 
@@ -242,7 +290,7 @@ function selectShip(evt) {
 // Then remove the ship div and reset the current ship length 
 function placeBattleship(evt) {
     let target = evt.target
-    if (target.className !== 'node') return
+    if (target.className !== 'node' && target.className !== 'valid-position') return
     let firstIndex = target.id.split('');
     let y = parseInt(firstIndex[0]);
     let x = parseInt(firstIndex[1]);
@@ -271,9 +319,10 @@ function placeBattleship(evt) {
     shipPositions.forEach(([a, b]) => {
         playerState[a][b] = 1;
     })
-    renderOneBoard(placementBoard, playerState);
     currentShip.remove();
     currentShipLength = 0;
+    renderOneBoard(placementBoard, playerState);
+
 
 }
 
@@ -334,6 +383,8 @@ function startGame() {
     clearAll();
     createShipMenu();
     createMessage('Place Your Ships');
+    document.getElementById('placement-board').addEventListener('mouseover', hoverEffect);
+    document.getElementById('placement-board').addEventListener('mouseout', unHoverEffect);
 } 
 
 // The player name and state passed in are opposite as it checks the board you are firing at
@@ -410,25 +461,31 @@ function playerFire(evt) {
 
 // Match the Dom board to the game state ship positions
 function renderOneBoard(board, state) {
+
     const boardArr = Array.from(board.children);
     boardArr.forEach(node => {
         let idx = node.id.split('');
-        let target = state[idx[0]][idx[1]]
-        switch (target){
-            case 0:
-                node.className = 'node';
-            break;
-            case 1:
-                node.className = 'ship';
-            break;
-            case 2:
-                node.className = 'miss';
-            break;
-            case 3:
-                node.className = 'hit';
-            break;
-        }
+        checkPosition(state, idx[0], idx[1], node);
     });
+}
+
+function checkPosition(state, a, b, node) {
+
+    let target = state[a][b]
+    switch (target){
+        case 0:
+            node.className = 'node';
+        break;
+        case 1:
+            node.className = 'ship';
+        break;
+        case 2:
+            node.className = 'miss';
+        break;
+        case 3:
+            node.className = 'hit';
+        break;
+    }
 }
 
 // Renders Player Board and Cpu Board to display the current state
