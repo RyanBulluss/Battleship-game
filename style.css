@@ -48,7 +48,7 @@ footer {
 section {
     height: 5vmin;
     color: black;
-    padding: 2vmin;
+    padding: 3vmin;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -57,10 +57,10 @@ section {
 
 main {
     flex-grow: 1;
+    flex-wrap: wrap;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
 }
 
 h1 {
@@ -97,8 +97,8 @@ h4 {
 }
 
 #cpu-board > .ship:hover {
-    background-color: #ccc;
-    cursor: crosshair;
+    background-color: #aaa;
+    cursor: pointer;
     border: #222 solid 0.4vmin;
 }
 
@@ -109,8 +109,8 @@ h4 {
 }
 
 #cpu-board >.node:hover{
-    background-color: #ccc;
-    cursor: crosshair;
+    background-color: #aaa;
+    cursor: pointer;
 }
 
 .ship {
@@ -181,8 +181,10 @@ input[type=range] {
     appearance: none; 
     background-color: #222;
     width: 100%;
+    height: 2vmin;
     outline: none;
     border-radius: 2vmin;
+    
 }
 
 .difficulty {
@@ -194,11 +196,7 @@ input:hover {
     cursor: pointer;
 }
 label {
-    margin-bottom: 1.5vmin;
-}
-
-#name-input {
-    cursor: auto;
+    margin-bottom: 2vmin;
 }
 
 
@@ -272,13 +270,13 @@ button:hover {
 
 .selected-ship {
     background-color: #333;
-    border: solid 0.4vmin #fa0;
+    border: solid 0.4vmin #fff;
     border-radius: 2vmin;
     margin: 0.5vmin;
 }
 
 .valid-position {
-    background-color: green;
+    background-color: #373;
     border-radius: 5%;
     border: #222 solid 0.4vmin;
     cursor: pointer;
@@ -290,3 +288,12 @@ button:hover {
     border: #222 solid 0.4vmin;
     cursor: pointer;
 }
+
+@media only screen and (max-width: 700px) {
+
+    #form-div {
+        width: 55vmin;
+    }
+
+
+} 

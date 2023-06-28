@@ -85,14 +85,14 @@ function winnerScreen() {
     document.getElementById('restart-button').addEventListener('click', function() {window.location.reload()})
     if (winner === 'cpu'){
         createMessage('All Your Ships Have Been Sunk. You Lose!');
-        mainSection.style.backgroundColor = '#f7474F';
-        messageSection.style.backgroundColor = '#f7474F';
-        controlsSection.style.backgroundColor = '#f7474F';
+        mainSection.style.backgroundColor = '#f7979F';
+        messageSection.style.backgroundColor = '#f7979F';
+        controlsSection.style.backgroundColor = '#f7979F';
     } else {
         createMessage('You Sunk All Their Ships. You Win!');
-        mainSection.style.backgroundColor = '#ffd700';
-        messageSection.style.backgroundColor = '#ffd700';
-        controlsSection.style.backgroundColor = '#ffd700';
+        mainSection.style.backgroundColor = '#a7f7aF';
+        messageSection.style.backgroundColor = '#a7f7aF';
+        controlsSection.style.backgroundColor = '#a7f7aF';
     }
 }
 
@@ -105,20 +105,20 @@ function regularDifficulty() {
     let y = cpuLastMove.position[0];
     let x = cpuLastMove.position[1];
 
-    function checkAdjacent(state, y, x) {
-        if (!validShot(state, y, x)) return false;
-        let target = state[y][x]
-        state[y][x] = target === 0 ? 3 : 2;
-        state[y][x] = target === 1 ? 3 : 2;
+    function checkAdjacent(y, x) {
+        if (!validShot(playerState, y, x)) return false;
+        let target = playerState[y][x]
+        playerState[y][x] = target === 0 ? 3 : 2;
+        playerState[y][x] = target === 1 ? 3 : 2;
         cpuLastMove.hit = target === 1 ? true : false;
         cpuLastMove.position = target === 1 ? [y, x] : cpuLastMove.position;
         return true;
     }
-    
-    if (checkAdjacent(playerState, y + 1, x)) return true;
-    if (checkAdjacent(playerState, y - 1, x)) return true;
-    if (checkAdjacent(playerState, y, x + 1)) return true;
-    if (checkAdjacent(playerState, y, x - 1)) return true;
+
+    if (checkAdjacent(y + 1, x)) return true;
+    if (checkAdjacent(y - 1, x)) return true;
+    if (checkAdjacent(y, x + 1)) return true;
+    if (checkAdjacent(y, x - 1)) return true;
     return false;
 }
 
