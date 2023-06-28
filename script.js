@@ -72,6 +72,42 @@ sizeSlider.addEventListener('input', function(e) {
 
 
 
+
+
+
+
+
+
+function winnerScreen() {
+    clearControls();
+    clearMessage();
+    createButton('restart');
+    document.getElementById('restart-button').addEventListener('click', function() {window.location.reload()})
+    if (winner === 'cpu'){
+        createMessage('All Your Ships Have Been Sunk. You Lose!');
+        mainSection.style.backgroundColor = '#f7474F';
+        messageSection.style.backgroundColor = '#f7474F';
+        controlsSection.style.backgroundColor = '#f7474F';
+    } else {
+        createMessage('You Sunk All Their Ships. You Win!');
+        mainSection.style.backgroundColor = '#ffd700';
+        messageSection.style.backgroundColor = '#ffd700';
+        controlsSection.style.backgroundColor = '#ffd700';
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 function placementCheck(target) {
     let firstIndex = target.id.split('');
     let y = parseInt(firstIndex[0]);
@@ -99,39 +135,29 @@ function placementCheck(target) {
     return [shipPositions, valid];
 }
 
-
-
-
 function hoverEffect(evt) {
     let target = evt.target;
     if (!currentShip) return;
     if (target.id === 'placement-board') return;
     const checks = placementCheck(target);
-
     checks[0].forEach(([a, b]) => {
+        if (a > playerState.length - 1 || b > playerState[0].length - 1) return;
         document.getElementById(`${a}${b}`).className = checks[1] ? 'valid-position' : 'invalid-position';
     })
 }
-
-
 
 function unHoverEffect(evt) {
     let target = evt.target;
     if (!currentShip) return;
     if (target.id === 'placement-board') return;
+    
     const checks = placementCheck(target);
-
     checks[0].forEach(([a, b]) => {
+        if (a > playerState.length - 1 || b > playerState[0].length - 1) return;
         let node = document.getElementById(`${a}${b}`)
         checkPosition(playerState, a, b, node)
     })
 }
-
-
-
-
-
-
 
 // Loops to find a valid position and changes boat to hit or node to miss
 // Then checks win and renders state
@@ -222,19 +248,7 @@ function recruitDifficulty() {
     }
 }
 
-function winnerScreen() {
-    clearControls();
-    clearMessage();
-    createButton('restart');
-    document.getElementById('restart-button').addEventListener('click', function() {window.location.reload()})
-    if (winner === 'cpu'){
-        createMessage('All Your Ships Have Been Sunk. You Lose!');
-    } else {
-        createMessage('You Sunk All Their Ships. You Win!');
-    }
 
-
-}
 
 function getDifficulty() {
     difficultyOptions.forEach(option => {
@@ -470,7 +484,7 @@ function renderOneBoard(board, state) {
 }
 
 function checkPosition(state, a, b, node) {
-
+    if (a > userSizeChoice || b > userSizeChoice) return;
     let target = state[a][b]
     switch (target){
         case 0:
