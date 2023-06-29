@@ -460,7 +460,6 @@ function renderOneBoard(board, state) {
 }
 
 function checkPosition(state, a, b, node) {
-    if (a > userSizeChoice || b > userSizeChoice) return;
     let target = state[a][b]
     switch (target){
         case 0:
