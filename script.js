@@ -25,7 +25,7 @@ let shipsArray = [ships.carrier, ships.battleship, ships.submarine, ships.destro
 
 // Variables
 let difficulty;
-let username = 'Ryan'; // Default name
+let username = 'Player 1'; // Default name
 let userSizeChoice; //over 10 breaks game
 let boardSize;
 let playerBoard;

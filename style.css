@@ -25,7 +25,7 @@ header, footer {
 }
 
 footer {
-    height: 5vh;
+    height: 6vh;
     font-size: 2vmin;
     justify-content: space-between;
     align-items: center;
@@ -146,17 +146,18 @@ h4 {
 #form-div {
     background-color: #333;
     width: 55vmin;
-    height: 55vmin;
+    height: 80%;
     margin: 2vmin;
     display: flex;
     flex-wrap: wrap;
+
     justify-content: space-around;
     align-items: start;
     border: solid black 0.5vmin;
     border-radius: 2vmin;
     accent-color: #ff8800;
     float: left;
-    margin: 2vmin;
+    margin: 2vmin 5vmin;
 }
 
 strong {
@@ -291,6 +292,9 @@ button:hover {
 
 @media only screen and (max-width: 700px) {
     #form-div {
-        width: 55vmin;
+        font-size: 3vmin;
+    }
+    strong{
+        font-size: 4vmin;
     }
 } 
