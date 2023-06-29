@@ -47,7 +47,7 @@ let cpuLastMove = {
 
 // Pressing the start game button stores the user values. Then it clears main and creates ship placement screen 
 startButton.addEventListener('click', startGame);
-window.addEventListener('load', createShips);
+// window.addEventListener('load', createShips);
 
 shipSlider.addEventListener('input', function(e) {
     shipsArray = shipsArray.filter(ship => ship !== 3 && ship !== 2);
@@ -55,13 +55,6 @@ shipSlider.addEventListener('input', function(e) {
         shipsArray.splice(2, 0, 3);
     }
     shipsArray.push(2);
-    document.querySelectorAll('#ship-container > *').forEach(el => el.remove())
-    shipsArray.forEach(ship => {
-        let newShip = document.createElement('div');
-        newShip.id = `ship-${ship}`;
-        newShip.className = 'placement-ship';
-        document.getElementById('ship-container').append(newShip);
-    })
     document.getElementById('ships-input').innerText = shipsArray.length;
 })
 
