@@ -419,7 +419,6 @@ function createState(size) {
 
 // Takes an input (x) and creates a board div with x squared nodes
 function createBoard(playerName, size) {
-    boardSize = size * size;
     rootVars.style.setProperty('--board-size', size);
     let newDiv = document.createElement('div');
     newDiv.setAttribute('id', `${playerName}-board`)
@@ -503,7 +502,6 @@ function randomShip(state, shipSize) {
         let x = rng(state.length);
         let y = rng(state.length);
         let isVertical = rng(2) === 1
-
         //array to track the ship positions with a loop to push them in
         let shipPositions = []
         for (let i = 0; i < shipSize; i++) {
@@ -513,7 +511,6 @@ function randomShip(state, shipSize) {
                 shipPositions.push([y, x + i])
             }
         }
-
         // Valid check is true if all positions are within state length and position is empty (0)
         let validCheck = shipPositions.every(([x, y]) => {
             return (
@@ -524,11 +521,8 @@ function randomShip(state, shipSize) {
             state[y][x] === 0
             );
         });
-        
         // if valid check was false retry loop
         if (!validCheck) continue;
-
-
         // Set the valid checked ship positions onto the game state. Valid = true to end loop
         shipPositions.forEach(([x, y]) => {
             state[y][x] = 1;

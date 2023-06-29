@@ -93,19 +93,19 @@ h4 {
 #cpu-board > .ship {
     background-color: #3186FF;
     border-radius: 5%;
-    border: #222 solid 0.4vmin;
+    border: #222 solid 0.2vmin;
 }
 
 #cpu-board > .ship:hover {
     background-color: #aaa;
     cursor: pointer;
-    border: #222 solid 0.4vmin;
+    border: #222 solid 0.2vmin;
 }
 
 .node {
     background-color: #3186FF;
     border-radius: 5%;
-    border: #222 solid 0.4vmin;
+    border: #222 solid 0.2vmin;
 }
 
 #cpu-board >.node:hover{
@@ -116,20 +116,20 @@ h4 {
 .ship {
     background-color: #666;
     border-radius: 5%;
-    border: #222 solid 0.4vmin;
+    border: #222 solid 0.2vmin;
 
 }
 
 .miss {
     background-image: linear-gradient(to top, #2222dd, #3030bc, #222C77);
-    border: #222 solid 0.4vmin;
+    border: #222 solid 0.2vmin;
     border-radius: 5%;
 
 }
 
 .hit {
     background-image: linear-gradient(to top, #ff5533, #ff1111, #f3170A);
-    border: #222 solid 0.4vmin;
+    border: #222 solid 0.2vmin;
     border-radius: 5%;
 
 }
@@ -278,22 +278,19 @@ button:hover {
 .valid-position {
     background-color: #373;
     border-radius: 5%;
-    border: #222 solid 0.4vmin;
+    border: #222 solid 0.2vmin;
     cursor: pointer;
 }
 
 .invalid-position {
     background-color: red;
     border-radius: 5%;
-    border: #222 solid 0.4vmin;
+    border: #222 solid 0.2vmin;
     cursor: pointer;
 }
 
 @media only screen and (max-width: 700px) {
-
     #form-div {
         width: 55vmin;
     }
-
-
 } 
