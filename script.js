@@ -135,7 +135,7 @@ function placementCheck(target) {
         }
     }
 
-    // Valid check is true if all positions are within state length and position is empty (0)
+    
     if (!shipPositions.every(([y, x]) => {
         return (
         x >= 0 &&
