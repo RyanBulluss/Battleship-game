@@ -48,7 +48,7 @@ With that I was able to get the AI to zone in on ship locations like a real play
 --- 
 
 ## Challenges 
-The further I got in the project, the more I came up with better ways I could have done things. This led me to refactoring a lot of code but I did not have time to go back over everything. One of the mistakes I made early on was in creating the game states as a 2D array of numbers. Instead I should have made a class to create individual objects for each board position to contain: type of ship, ship edges and other important information about the state of the game. Because I only stored numbers to represent the ships, hits and misses, it made creating new features much harder. I also found it difficult to make the game look.
+The further I got in the project, the more I came up with better ways I could have done things. This led me to refactoring a lot of code but I did not have time to go back over everything. One of the mistakes I made early on was in creating the game states as a 2D array of numbers. Instead I should have made a class to create individual objects for each board position to contain: type of ship, ship edges and other important information about the state of the game. Because I only stored numbers to represent the ships, hits and misses, it made creating new features much harder.
 
 ## Wins
 - Ship placement hover effect
