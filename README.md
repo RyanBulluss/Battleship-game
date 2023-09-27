@@ -51,14 +51,13 @@ With that I was able to get the AI to zone in on ship locations like a real play
 The further I got in the project, the more I came up with better ways I could have done things. This led me to refactoring a lot of code but I did not have time to go back over everything. One of the mistakes I made early on was in creating the game states as a 2D array of numbers. Instead I should have made a class to create individual objects for each board position to contain: type of ship, ship edges and other important information about the state of the game. Because I only stored numbers to represent the ships, hits and misses, it made creating new features much harder. I also found it difficult to make the game look.
 
 ## Wins
-- Dynamic game size, ships and difficulty
 - Ship placement hover effect
-![Alt text](images/image.png)
-This was achieved using the mouseover event to change the nodes to a "valid" or "invalid" position class after checking if the position went over the bounds of the board or if it conflicted with another ship.
-
 - Competitive Ai opponent
 - No known bugs
 - Somewhat responsive design
+- Dynamic game size, ships and difficulty
+
+By using variables instead of fixed numbers in the initial version of the game, it became much easier to make the game flexible and adjustable. This came in handy when adding more features because all I had to do was let users pick their own game settings, and the game would automatically adapt to what they chose.
 
 ---
 
